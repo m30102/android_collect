@@ -1,0 +1,48 @@
+plugins {
+    id 'com.android.application'
+}
+apply from : '../common.gradle'
+
+android {
+
+    defaultConfig {
+        applicationId "com.fan.collect"
+    }
+
+
+    signingConfigs {
+        debug {
+            storeFile file('keystores/lon_sjzt2.jks')
+            storePassword '^H&J*K'
+            keyAlias 'lon_sea'
+            keyPassword '^H&J*K'
+        }
+
+        release {
+            storeFile file('keystores/lon_sjzt2.jks')
+            storePassword '^H&J*K'
+            keyAlias 'lon_sea'
+            keyPassword '^H&J*K'
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+
+}
+
+dependencies {
+
+    implementation project(':modulesBase:lib_base')
+
+    if(!rootProject.ext.isDebug){
+        implementation project(':modulesBusiness:main')
+    }
+
+}

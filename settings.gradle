@@ -1,0 +1,21 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+rootProject.name = "android_collect"
+include ':app'
+include ':modulesBusiness:main'
+include ':modulesBase:lib_base'
+include ':modulesBusiness:login'
+include ':modulesBusiness:share'
+include ':modulesBase:lib_widget'
+include ':modulesJavalib'
+include ':modulesBusiness:android_version'
+include ':modulesBusiness:mjetpack'
+include ':modulesBase:lib_jsbridge'

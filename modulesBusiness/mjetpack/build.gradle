@@ -1,0 +1,11 @@
+plugins {
+    id 'com.android.library'
+}
+apply from : '../../common.gradle'
+def ext = rootProject.ext
+
+dependencies {
+
+    implementation project(':modulesBase:lib_base')
+    kapt ext.libARouterCompiler
+}

@@ -1,0 +1,24 @@
+def ext = rootProject.ext
+
+if(ext.isDebug){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+apply from : '../../common.gradle'
+
+android {
+
+    defaultConfig {
+        if(ext.isDebug){
+            applicationId 'com.fan.collect.module.widget'
+        }
+    }
+
+}
+
+dependencies {
+
+    implementation project(':modulesBase:lib_base')
+    kapt ext.libARouterCompiler
+}

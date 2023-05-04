@@ -10,6 +10,6 @@
         <activity android:name="com.fan.collect.main.study.activity.launch.singletask.Activity2"></activity>
         <activity android:name="com.fan.collect.main.study.activity.launch.singletask.Activity3" android:taskAffinity="com.fan.collect2" android:launchMode="singleTask"></activity>
         <activity android:name="com.fan.collect.main.study.view.CustomViewActivity"></activity>
-        <activity android:name="com.fan.collect.main.study.network.NetworkCheckActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name="com.fan.collect.main.study.network.NetworkCheckActivity"></activity>
     </application>
 </manifest>

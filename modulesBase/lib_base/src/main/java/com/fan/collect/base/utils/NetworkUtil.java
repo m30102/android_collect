@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.os.Build;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -228,17 +229,23 @@ public class NetworkUtil {
         return result;
     }
 
-
     // 流量是否打开，此时wifi可能打开可能关闭
     public static boolean isMobileNetOpenedRef(Context context) {
         boolean result = false;
-        try {
-            ConnectivityManager connectivityManager = getConnectivityManager(context);
-            Method getMobileDataEnabled = ConnectivityManager.class.getDeclaredMethod("getMobileDataEnabled");
-            getMobileDataEnabled.setAccessible(true);
-            result = (boolean) getMobileDataEnabled.invoke(connectivityManager);
-        } catch (Exception e) {
-            Log.e(TAG, "reflect MobileDataEnable error");
+        TelephonyManager telMgr = (TelephonyManager)
+                context.getSystemService(Context.TELEPHONY_SERVICE);
+        int simState = telMgr.getSimState();
+        Log.e(TAG, "simState:"+simState);
+        // sim卡就绪
+        if(simState != TelephonyManager.SIM_STATE_ABSENT && simState != TelephonyManager.SIM_STATE_UNKNOWN){
+            try {
+                ConnectivityManager connectivityManager = getConnectivityManager(context);
+                Method getMobileDataEnabled = ConnectivityManager.class.getDeclaredMethod("getMobileDataEnabled");
+                getMobileDataEnabled.setAccessible(true);
+                result = (boolean) getMobileDataEnabled.invoke(connectivityManager);
+            } catch (Exception e) {
+                Log.e(TAG, "reflect MobileDataEnable error");
+            }
         }
         return result;
     }

@@ -13,6 +13,9 @@ class ComponentsDemo:BaseVBActivity<ActivityComponentsBinding>() {
         binding.btnActivitySingletask.setOnClickListener {
             startActivity(Intent(this,Activity1::class.java))
         }
+        binding.btnActivityDialog.setOnClickListener {
+            startActivity(Intent(this,DialogActivity::class.java))
+        }
     }
 
     override fun getViewBinding(): ActivityComponentsBinding {

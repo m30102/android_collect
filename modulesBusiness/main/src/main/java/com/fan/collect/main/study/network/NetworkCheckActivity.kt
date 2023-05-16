@@ -1,28 +1,22 @@
 package com.fan.collect.main.study.network
 
-import android.R
 import android.annotation.SuppressLint
-import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
+import android.telephony.SubscriptionManager
+import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.Gravity
-import android.view.View
-import android.view.Window
 import android.view.WindowManager
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.WindowInsetsControllerCompat
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.NetworkUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.fan.collect.base.BaseVBActivity
 import com.fan.collect.base.utils.BlackToast
 import com.fan.collect.base.utils.NetworkUtil
 import com.fan.collect.module.main.databinding.ActivityNetworkCheckBinding
-import com.hjq.toast.Toaster
-import com.hjq.toast.style.BlackToastStyle
 
 
 class NetworkCheckActivity: BaseVBActivity<ActivityNetworkCheckBinding>() {
@@ -38,14 +32,10 @@ class NetworkCheckActivity: BaseVBActivity<ActivityNetworkCheckBinding>() {
 
 //        requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
-        val params = window.attributes
-        params.layoutInDisplayCutoutMode =
-            WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-        window.attributes = params
-
         BarUtils.getStatusBarHeight()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
     override fun initView() {
 
@@ -55,7 +45,18 @@ class NetworkCheckActivity: BaseVBActivity<ActivityNetworkCheckBinding>() {
             val wifiConnected = NetworkUtil.isWifiConnected(this);
             val modileConnected = NetworkUtil.isModileConnected(this);
             val mobileNetOpenedRef = NetworkUtil.isMobileNetOpenedRef(this);
-            binding.tvResult1.text = "networkConnected:" + networkConnected + "\nwifiConnected:" + wifiConnected + "\nmodileConnected:" +modileConnected+"\nmobileNetOpenedRef:"+mobileNetOpenedRef
+
+
+            /*
+            需要权限 READ_PHONE_STATE
+            val subscriptionManager = SubscriptionManager.from(this)
+            val activeSubscriptionInfoList = subscriptionManager.activeSubscriptionInfoList
+            activeSubscriptionInfoList.forEach { subscriptionInfo -> {
+                Log.e(TAG,"subscriptionInfo:"+subscriptionInfo)
+            } }*/
+
+            binding.tvResult1.text = "networkConnected:" + networkConnected + "\nwifiConnected:" + wifiConnected + "\nmodileConnected:" +
+                    modileConnected+"\nmobileNetOpenedRef:"+mobileNetOpenedRef
         }
 
 

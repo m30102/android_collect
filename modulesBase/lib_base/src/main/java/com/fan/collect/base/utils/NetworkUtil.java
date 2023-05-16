@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.os.Build;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -194,7 +195,7 @@ public class NetworkUtil {
         try {
             ConnectivityManager connectivityManager = getConnectivityManager(context);
             // 实际上23就有这个类，但Q版本才标记过时, 保守做法
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
                 Network activeNetwork = connectivityManager.getActiveNetwork();
                 NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
                 result = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
@@ -215,7 +216,7 @@ public class NetworkUtil {
         try {
             ConnectivityManager connectivityManager = getConnectivityManager(context);
             // 实际上23就有这个类，但Q版本才标记过时, 保守做法
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
                 Network activeNetwork = connectivityManager.getActiveNetwork();
                 NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
                 result = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
@@ -229,8 +230,43 @@ public class NetworkUtil {
         return result;
     }
 
-    // 流量是否打开，此时wifi可能打开可能关闭
     public static boolean isMobileNetOpenedRef(Context context) {
+        boolean result = false;
+        TelephonyManager telMgr = (TelephonyManager)
+                context.getSystemService(Context.TELEPHONY_SERVICE);
+        int simState = telMgr.getSimState();
+        int dataState = telMgr.getDataState();
+        int dataActivity = telMgr.getDataActivity();
+
+        Log.e(TAG, "simState:"+simState+" dataState:"+dataState+" dataActivity:"+dataActivity);
+        // sim卡就绪
+        if(simState != TelephonyManager.SIM_STATE_ABSENT && simState != TelephonyManager.SIM_STATE_UNKNOWN){
+            try {
+                ConnectivityManager connectivityManager = getConnectivityManager(context);
+                Method getMobileDataEnabled = ConnectivityManager.class.getDeclaredMethod("getMobileDataEnabled");
+                getMobileDataEnabled.setAccessible(true);
+                // 开关状态
+                boolean switchEnbabled = (boolean) getMobileDataEnabled.invoke(connectivityManager);
+                if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+                    try {
+                        switchEnbabled = telMgr.createForSubscriptionId(SubscriptionManager.getDefaultSubscriptionId()).isDataEnabled();
+                        Log.e(TAG, "switchEnbabled26:"+switchEnbabled);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                // 连接状态
+                boolean dataEnabled = (dataState !=TelephonyManager.DATA_DISCONNECTED  && dataState !=TelephonyManager.DATA_UNKNOWN);
+                result = switchEnbabled && dataEnabled;
+            } catch (Exception e) {
+                Log.e(TAG, "reflect MobileDataEnable error");
+            }
+        }
+        return result;
+    }
+
+    // 流量是否打开，此时wifi可能打开可能关闭
+    /*public static boolean isMobileNetOpenedRef(Context context) {
         boolean result = false;
         TelephonyManager telMgr = (TelephonyManager)
                 context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -243,12 +279,14 @@ public class NetworkUtil {
                 Method getMobileDataEnabled = ConnectivityManager.class.getDeclaredMethod("getMobileDataEnabled");
                 getMobileDataEnabled.setAccessible(true);
                 result = (boolean) getMobileDataEnabled.invoke(connectivityManager);
+
+                boolean dataEnabled = telMgr.createForSubscriptionId(SubscriptionManager.getDefaultSubscriptionId()).isDataEnabled();
             } catch (Exception e) {
                 Log.e(TAG, "reflect MobileDataEnable error");
             }
         }
         return result;
-    }
+    }*/
 
 
     public static int gotoSystemNetworkSetting(Context context) {

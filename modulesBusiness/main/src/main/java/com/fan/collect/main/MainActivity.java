@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fan.collect.base.constance.NaviConst;
 import com.fan.collect.main.study.activity.launch.singletask.ComponentsDemo;
+import com.fan.collect.main.study.language.MulLanguage;
 import com.fan.collect.main.study.network.NetworkCheckActivity;
 import com.fan.collect.main.study.view.CustomViewActivity;
 import com.fan.collect.module.main.databinding.ActivityMainMainBinding;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, NetworkCheckActivity.class));
         });
 
+        binding.btnSwitchLanguage.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, MulLanguage.class));
+        });
 
     }
 

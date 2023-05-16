@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.DimenRes
+import androidx.fragment.app.DialogFragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ScreenUtils
 import com.fan.collect.base.constance.NaviConst
@@ -84,11 +85,22 @@ class LaunchActivity : Activity() {
         }
 
 
-        Log.e("LaunchActivity","onCreate onCreate onCreate");
+        Log.e("LaunchActivityTAG","onCreate onCreate onCreate");
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("LaunchActivityTAG","onResume onResume onResume");
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("LaunchActivityTAG","onstop onstop onstop");
+
     }
 
     override fun onDestroy() {
-        Log.e("LaunchActivity","onDestroyonDestroyonDestroy");
+        Log.e("LaunchActivityTAG","onDestroyonDestroyonDestroy");
         super.onDestroy()
     }
 }

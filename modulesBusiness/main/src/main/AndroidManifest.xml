@@ -11,5 +11,6 @@
         <activity android:name="com.fan.collect.main.study.activity.launch.singletask.Activity3" android:taskAffinity="com.fan.collect2" android:launchMode="singleTask"></activity>
         <activity android:name="com.fan.collect.main.study.view.CustomViewActivity"></activity>
         <activity android:name="com.fan.collect.main.study.network.NetworkCheckActivity"></activity>
+        <activity android:name="com.fan.collect.main.study.language.MulLanguage" android:configChanges="locale" ></activity>
     </application>
 </manifest>

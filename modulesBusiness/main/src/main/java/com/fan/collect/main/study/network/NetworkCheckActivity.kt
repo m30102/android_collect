@@ -32,7 +32,8 @@ class NetworkCheckActivity: BaseVBActivity<ActivityNetworkCheckBinding>() {
 
 //        requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
-        BarUtils.getStatusBarHeight()
+
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -45,8 +46,6 @@ class NetworkCheckActivity: BaseVBActivity<ActivityNetworkCheckBinding>() {
             val wifiConnected = NetworkUtil.isWifiConnected(this);
             val modileConnected = NetworkUtil.isModileConnected(this);
             val mobileNetOpenedRef = NetworkUtil.isMobileNetOpenedRef(this);
-
-
             /*
             需要权限 READ_PHONE_STATE
             val subscriptionManager = SubscriptionManager.from(this)
@@ -54,16 +53,14 @@ class NetworkCheckActivity: BaseVBActivity<ActivityNetworkCheckBinding>() {
             activeSubscriptionInfoList.forEach { subscriptionInfo -> {
                 Log.e(TAG,"subscriptionInfo:"+subscriptionInfo)
             } }*/
-
             binding.tvResult1.text = "networkConnected:" + networkConnected + "\nwifiConnected:" + wifiConnected + "\nmodileConnected:" +
                     modileConnected+"\nmobileNetOpenedRef:"+mobileNetOpenedRef
         }
 
 
         binding.btnCheck2.setOnClickListener {
-            val mobileDataEnabled = NetworkUtils.getMobileDataEnabled()
-            val wifiEnabled = NetworkUtils.getWifiEnabled()
-            binding.tvResult2.text = "mobileDataEnabled:"+mobileDataEnabled+"\nwifiEnabled:"+wifiEnabled
+
+                NetworkUtil.requestByCell(this)
         }
     }
 

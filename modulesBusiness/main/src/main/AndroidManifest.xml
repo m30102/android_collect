@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fan.collect.module.main">
-
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application>
         <activity android:name="com.fan.collect.main.MainActivity"></activity>
 
         <activity android:name="com.fan.collect.main.study.activity.launch.singletask.ComponentsDemo"></activity>
-        <activity android:name="com.fan.collect.main.study.activity.launch.singletask.Activity1"></activity>
+        <activity android:name="com.fan.collect.main.study.activity.launch.singletask.Activity1"  android:theme="@android:style/Theme.Dialog"></activity>
         <activity android:name="com.fan.collect.main.study.activity.launch.singletask.Activity2"></activity>
         <activity android:name="com.fan.collect.main.study.activity.launch.singletask.Activity3" android:taskAffinity="com.fan.collect2" android:launchMode="singleTask"></activity>
         <activity android:name="com.fan.collect.main.study.view.CustomViewActivity"></activity>

@@ -4,10 +4,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
+import android.net.NetworkRequest;
 import android.os.Build;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
@@ -15,13 +17,20 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.blankj.utilcode.util.NetworkUtils;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.annotation.Retention;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.URL;
 
 
 /**
@@ -231,6 +240,7 @@ public class NetworkUtil {
     }
 
     public static boolean isMobileNetOpenedRef(Context context) {
+
         boolean result = false;
         TelephonyManager telMgr = (TelephonyManager)
                 context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -249,6 +259,7 @@ public class NetworkUtil {
                 boolean switchEnbabled = (boolean) getMobileDataEnabled.invoke(connectivityManager);
                 if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
                     try {
+                        Log.e(TAG, "switchEnbabled:"+switchEnbabled);
                         switchEnbabled = telMgr.createForSubscriptionId(SubscriptionManager.getDefaultSubscriptionId()).isDataEnabled();
                         Log.e(TAG, "switchEnbabled26:"+switchEnbabled);
                     }catch (Exception e){
@@ -264,6 +275,70 @@ public class NetworkUtil {
         }
         return result;
     }
+    public static void requestByCell(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkRequest.Builder builder = new NetworkRequest.Builder();
+        builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+        builder.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        NetworkRequest request = builder.build();
+        ConnectivityManager.NetworkCallback callback  = new ConnectivityManager.NetworkCallback(){
+            // 网络连接成功回调 子线程
+            @Override
+            public void onAvailable(@NonNull Network network) {
+                super.onAvailable(network);
+                LogHelper.i(TAG,"onAvailable:"+Thread.currentThread().getId());
+                connectivityManager.unregisterNetworkCallback(this);
+            }
+            // 顺序 onAvailable ->  onCapabilitiesChanged ->  onLinkPropertiesChanged -> onBlockedStatusChanged
+            // 网络连接超时或网络不可达
+            @Override
+            public void onUnavailable() {
+                super.onUnavailable();
+                LogHelper.i(TAG,"onUnavailable");
+            }
+
+            // 网络已断开连接
+            @Override
+            public void onLost(@NonNull Network network) {
+                super.onLost(network);
+                LogHelper.i(TAG,"onLost");
+            }
+
+            // 网络正在丢失连接
+            @Override
+            public void onLosing(@NonNull Network network, int maxMsToLive) {
+                super.onLosing(network, maxMsToLive);
+                LogHelper.i(TAG,"onLosing");
+            }
+
+            //网络状态变化
+            @Override
+            public void onCapabilitiesChanged(@NonNull Network network, @NonNull NetworkCapabilities networkCapabilities) {
+                super.onCapabilitiesChanged(network, networkCapabilities);
+                LogHelper.i(TAG,"onCapabilitiesChanged");
+            }
+
+            //网络连接属性变化
+            @Override
+            public void onLinkPropertiesChanged(@NonNull Network network, @NonNull LinkProperties linkProperties) {
+                super.onLinkPropertiesChanged(network, linkProperties);
+                LogHelper.i(TAG,"onLinkPropertiesChanged");
+            }
+
+            //访问的网络阻塞状态发生变化
+            @Override
+            public void onBlockedStatusChanged(@NonNull Network network, boolean blocked) {
+                super.onBlockedStatusChanged(network, blocked);
+                LogHelper.i(TAG,"onBlockedStatusChanged");
+            }
+        };
+        LogHelper.i(TAG,"registerNetworkCallback:"+Thread.currentThread().getId());
+        connectivityManager.registerNetworkCallback(request,callback);
+        connectivityManager.requestNetwork(request,callback);
+    }
+
+
+
 
     // 流量是否打开，此时wifi可能打开可能关闭
     /*public static boolean isMobileNetOpenedRef(Context context) {

@@ -8,7 +8,9 @@ import androidx.fragment.app.DialogFragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ScreenUtils
 import com.fan.collect.base.constance.NaviConst
+import com.fan.collect.base.http.EasyHttp
 import com.fan.collect.databinding.ActivityMainBinding
+import kotlin.concurrent.thread
 
 // 底部导航BottomNavigationView
 
@@ -86,6 +88,21 @@ class LaunchActivity : Activity() {
 
 
         Log.e("LaunchActivityTAG","onCreate onCreate onCreate");
+
+        Thread{
+            request()
+        }.start()
+    }
+
+    fun request(){
+        val  a  = EasyHttp("https://www.mxnzp.com/api/daily_word/recommend?app_secret=your&app_id=your")
+        a.access()
+        if(a.success()){
+            val b = a.responseStr
+            Log.e("LaunchActivityTAG","res:"+b)
+        }else{
+            Log.e("LaunchActivityTAG", a.httpCode.toString() + a.httpAccessErrMsg)
+        }
     }
 
     override fun onResume() {

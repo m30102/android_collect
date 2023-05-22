@@ -30,9 +30,8 @@ ext {
             "immersionbarktx"      :   'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2',
             "Toaster"               : 'com.github.getActivity:Toaster:12.2',
 
-            "mobt"                  : 'com.mob.sdk:MobSDK:+',
-            "toutiaolog"            : "com.bytedance.applog:RangersAppLog-Lite-cn:6.14.3",
-            "toutiao"               : "com.bytedance.applog:RangersAppLog-All-convert:6.14.3",
+//            "toutiaolog"            : "com.bytedance.applog:RangersAppLog-Lite-cn:6.14.3",
+//            "toutiao"               : "com.bytedance.applog:RangersAppLog-All-convert:6.14.3",
     ]
 
     libARouter = "com.alibaba:arouter-api:1.5.2"

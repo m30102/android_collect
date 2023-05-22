@@ -30,12 +30,11 @@ dependencies {
     api  ext.dependencies.immersionbar
     api  ext.dependencies.immersionbarktx
     api  ext.dependencies.Toaster
-    api  ext.dependencies.mobt
     // 若出现找不到路由,那么卸载app后重装
     api  ext.libARouter
 
-    api  ext.dependencies.toutiaolog
-    api  ext.dependencies.toutiao
+//    api  ext.dependencies.toutiaolog
+//    api  ext.dependencies.toutiao
 
     // 各个业务module也需要 添加注解处理器 kapt ext.libARouterCompiler
     kapt ext.libARouterCompiler

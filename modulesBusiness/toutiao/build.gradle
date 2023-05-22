@@ -27,7 +27,7 @@ android {
 
 dependencies {
 
-    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+//    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
     implementation project(':modulesBase:lib_base')
 
     kapt ext.libARouterCompiler

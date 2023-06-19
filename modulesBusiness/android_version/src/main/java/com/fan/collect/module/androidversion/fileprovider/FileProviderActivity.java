@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
+
 import com.hjq.permissions.XXPermissions;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -40,8 +42,6 @@ public class FileProviderActivity extends AppCompatActivity {
         button.setOnClickListener(v -> {
             takePhotoNoCompress2();
         });
-
-
     }
 
     private static final int REQUEST_CODE_TAKE_PHOTO = 0x110;// 272

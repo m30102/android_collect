@@ -7,6 +7,7 @@ import androidx.annotation.DimenRes
 import androidx.fragment.app.DialogFragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ScreenUtils
+import com.blankj.utilcode.util.ThreadUtils
 import com.fan.collect.base.constance.NaviConst
 import com.fan.collect.base.http.EasyHttp
 import com.fan.collect.databinding.ActivityMainBinding
@@ -92,6 +93,8 @@ class LaunchActivity : Activity() {
         Thread{
             request()
         }.start()
+
+        ThreadUtils.getSinglePool()
     }
 
     fun request(){

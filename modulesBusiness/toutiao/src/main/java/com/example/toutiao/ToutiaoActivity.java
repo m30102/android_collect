@@ -5,6 +5,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bytedance.applog.AppLog;
+import com.bytedance.applog.IOaidObserver;
+import com.tencent.vasdolly.reader.ChannelReader;
+
 public class ToutiaoActivity extends AppCompatActivity {
 
     @Override
@@ -14,22 +19,21 @@ public class ToutiaoActivity extends AppCompatActivity {
 //        InitConfig initConfig = new InitConfig();
 //        initConfig.setImeiEnable(false);
 //        initConfig.setAppImei();
-/*        AppLog.setOaidObserver(new IOaidObserver() {
+        AppLog.setOaidObserver(new IOaidObserver() {
             @Override
             public void onOaidLoaded(@NonNull Oaid oaid) {
 
             }
         });
+
+
         new com.bytedance.bdtracker.z4(this).a();
         new com.bytedance.bdtracker.z4(this).a(new IOaidObserver() {
             @Override
             public void onOaidLoaded(@NonNull Oaid oaid) {
 
             }
-        });*/
-
-
-
+        });
 
     }
 }

@@ -1,156 +1,141 @@
 package com.fan.collect.java;
 
-import java.util.Arrays;
+
+import com.google.gson.JsonObject;
+import com.sun.org.apache.xpath.internal.SourceTree;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class Test {
 
 
-    static String ori = "   513721198102182554\n" +
-            "  513721199305092393\n" +
-            "  513721199411140678\n" +
-            "  513025197509130011\n" +
-            "  513721198311293402\n" +
-            "   513721197906293394\n" +
-            "   513025197505262295\n" +
-            "   513024197407057873\n" +
-            "   513721198201203816\n" +
-            "   513024197910017879\n" +
-            "   513025197104140051\n" +
-            "   513025196911075060\n" +
-            "   51302519690929837X\n" +
-            "   513025197009142390\n" +
-            "   51302519680511285X\n" +
-            "   513028196904222842\n" +
-            "   513025196702010017\n" +
-            "   513025197111132295\n" +
-            "  513721198902132387\n" +
-            "   513025196807130000\n" +
-            "  513025197308157576\n" +
-            "   513025197303101610\n" +
-            "   513025197210042463\n" +
-            "   513721198011063090\n" +
-            "   513025196707014498\n" +
-            "   513025196501047438\n" +
-            "   513025197310012472\n" +
-            "   513025197006172295\n" +
-            "   51302519710519262X\n" +
-            "   513721198612016011\n" +
-            "  513025196901195691\n" +
-            "   513721199303232380\n" +
-            "   513025197202172735\n" +
-            "   513025197301182752\n" +
-            "   513025196911157031\n" +
-            "  513721198001025699\n" +
-            "   513025195912300034\n" +
-            "   513721198306181182\n" +
-            "   513025196907243092\n" +
-            "   513721197907187235\n" +
-            "   13020419580621033X\n" +
-            "   513025197302056256\n" +
-            "   612321198604117526\n" +
-            "   513721198305257333\n" +
-            "  513721198705011594\n" +
-            "   513025197103054194\n" +
-            "   513721199006012840\n" +
-            "   513721199001052632\n" +
-            "   513028197404047990\n" +
-            "   513025197506250296\n" +
-            "   513721198611102196\n" +
-            "   513025196902088169\n" +
-            "   513025197004230033\n" +
-            "   513721197904141477\n" +
-            "   513027196205232033\n" +
-            "   513721198908032213\n" +
-            "   513721198810222203\n" +
-            "   513721198404281179\n" +
-            "   513025197912252393\n" +
-            "   513721198510060396\n" +
-            "  513721198404203875\n" +
-            "   513028197606166197\n" +
-            "   513721198306203599\n" +
-            "   513025197306153395\n" +
-            "   513721198004162090\n" +
-            "   513025197602240848\n" +
-            "   510723196410293417\n" +
-            "   513025197502276616\n" +
-            "   513025196709147139\n" +
-            "  513721197902053799\n" +
-            "   513025197511102108\n" +
-            "   513721198601082195\n" +
-            "   513025196412064017\n" +
-            "   513721198006190175\n" +
-            "   513025197210182861\n" +
-            "   513025196708107557\n" +
-            "   513025197310233793\n" +
-            "   513025196101230014\n" +
-            "   513025197508285978\n" +
-            "   513721198012090015\n" +
-            "   513025196905086812\n" +
-            "   513025197705013330\n" +
-            "  513025196710081616\n" +
-            "   51370119880314351X\n" +
-            "   510722196208172113\n" +
-            "   513025197206071894\n" +
-            "   513025197307053812\n" +
-            "   510722198410292118\n" +
-            "   512927196907053994\n" +
-            "   51302519681222506X\n" +
-            "  513025196811230852\n" +
-            "   510224197806147794\n" +
-            "   513025197812150381\n" +
-            "   513025195505055051\n"+
-            "   \t372522197308072610\n" +
-            "   \t372522197308072610\n" +
-            "   \t372522197406087218\n" +
-            "   \t7252219510513072X\n" +
-            "   \t372522197502010739\n" +
-            "   \t372523198009045752\n" +
-            "  \t372523198303299673\n" +
-            "  \t371522198603040033\n" +
-            "  \t371522198511190042\n" +
-            "  \t371522199111299668\n" +
-            "   \t37252219700421611X\n" +
-            "   \t372522197102261491\n" +
-            "   \t372522196609293113\n" +
-            "   \t372522197412210913\n" +
-            "   \t372522196912162618\n" +
-            "   \t72901198011270813\n" +
-            "   \t372522197104107279\n" +
-            "   \t422302198102050718\n" +
-            "   \t421281199508086538\n" +
-            "   \t42128119970317631X\n" +
-            "   \t422302196209120959\n" +
-            "   \t43042219850205302X\n" +
-            "   \t422323197202232719\n" +
-            "   \t422323196902194974\n" +
-            "   \t422302197303122728\n" +
-            "   \t422323197103052114\n" +
-            "   \t422302198502194112\n" +
-            "   \t422302197506100721\n" +
-            "   \t422323196809180754\n" +
-            "  \t422323196610084968\n" +
-            "   \t422323195708231159\n" +
-            "  \t421281199405110013\n" +
-            "   \t42128119641001003X\n" +
-            "   \t342529196807110815\n" +
-            "  \t342529198907120016\n" +
-            "   \t342529197302173612\n" +
-            "   \t342529197003260812\n" +
-            "  \t342529198705295416";
-
-    public static void dealPreCard(){
-        String[] split = ori.split("\n");
-        List<String> collect = Arrays.stream(split).map(s -> s.trim()).collect(Collectors.toList());
-        System.out.println(collect);
+    public static void dealPreCard() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = dateFormat.format(2147483647123l);
+        System.out.println(format);
+        System.out.println(System.currentTimeMillis());
+        String format2 = dateFormat.format(System.currentTimeMillis());
+        System.out.println(format2);
+        System.out.println(Integer.MAX_VALUE);
+        int a = (int) 2147483647123l;
+        System.out.println(a);
+        System.out.println(Long.MAX_VALUE);
+        //        2147483647
+        //        2306071459
+//        9223372036854775807
 
     }
-    public static void main(String[] args) {
 
-        dealPreCard();
+    static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static void main(String[] args) throws SocketException {
+        double v = Double.parseDouble("18.00");
+        int a = (int) (v * 100);
+        System.out.println(v);
+        System.out.println(a);
     }
 
+    public static String getLocalIpV4(final boolean useIPv4) {
+        try {
+            Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
+            LinkedList<InetAddress> adds = new LinkedList<>();
+            while (nis.hasMoreElements()) {
+                NetworkInterface ni = nis.nextElement();
+                // To prevent phone of xiaomi return "10.0.2.15"
+                if (!ni.isUp() || ni.isLoopback()) continue;
+                Enumeration<InetAddress> addresses = ni.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    adds.addFirst(addresses.nextElement());
+                }
+            }
+            for (InetAddress add : adds) {
+                if (!add.isLoopbackAddress()) {
+                    String hostAddress = add.getHostAddress();
+                    boolean isIPv4 = hostAddress.indexOf(':') < 0;
+                    if (useIPv4) {
+                        if (isIPv4) {
+                            return hostAddress;
+                        }
+                    } else {
+                        if (!isIPv4) {
+                            int index = hostAddress.indexOf('%');
+                            return index < 0
+                                    ? hostAddress.toUpperCase()
+                                    : hostAddress.substring(0, index).toUpperCase();
+                        }
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    private static void getIp() throws SocketException {
+        Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();
+        while (n.hasMoreElements()) { //for each interface
+            System.out.println("----------------------------------------------------");
+            NetworkInterface e = n.nextElement();
+            //name of the interface
+            System.out.println("Interface Name:" + e.getName());
+    /* A interface may be binded to many IP addresses like IPv4 and IPv6
+        hence getting the Enumeration of list of IP addresses  */
+            Enumeration<InetAddress> a = e.getInetAddresses();
+            while (a.hasMoreElements()) {
+                InetAddress addr = a.nextElement();
+                String add = addr.getHostAddress().toString();
+                if (add.length() < 17)
+                    System.out.println("IPv4 Address:" + add);
+                else
+                    System.out.println("IPv6 Address:" + add);
+            }
+            if (e.getHardwareAddress() != null) {
+                // getting the mac address of the particular network interface
+                byte[] mac = e.getHardwareAddress();
+                // properly formatting the mac address
+                StringBuilder macAddress = new StringBuilder();
+                for (int i = 0; i < mac.length; i++) {
+                    macAddress.append(String.format("%03X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+                }
+                System.out.println("Hardware adrress:" + macAddress.toString());
+            }
+            System.out.println("----------------------------------------------------");
+        }
+    }
+
+
+    public static String listToJson(List<?> list) {
+        StringBuilder json = new StringBuilder();
+        json.append("{");
+        if (list != null && list.size() > 0) {
+            for (Object obj : list) {
+                json.append(objectToJson(obj));
+                json.append(",");
+            }
+            json.setCharAt(json.length() - 1, '}');
+        } else {
+            json.append("}");
+        }
+        return json.toString();
+    }
+
+    public static String objectToJson(Object object) {
+        StringBuilder json = new StringBuilder();
+        if (object == null) {
+            json.append("\"\"");
+        } else if (object instanceof String || object instanceof Integer) {
+            json.append("\"").append(object.toString()).append("\"");
+        }
+        return json.toString();
+    }
 
 }

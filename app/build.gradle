@@ -40,9 +40,12 @@ android {
 dependencies {
 
     implementation project(':modulesBase:lib_base')
+    implementation "com.alipay.sdk:alipaysdk-android:+@aar"
 
     if(!rootProject.ext.isDebug){
         implementation project(':modulesBusiness:main')
+        implementation project(':modulesBusiness:toutiao')
     }
+    api 'com.alipay.sdk:alipaysdk-android:+@aar'
 
 }

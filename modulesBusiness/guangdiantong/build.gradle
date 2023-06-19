@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         if (ext.isDebug) {
-            applicationId 'com.fan.collect.module.toutiao'
+            applicationId 'com.fan.collect.module.guangdiantong'
         }
     }
 
@@ -27,7 +27,8 @@ android {
 
 dependencies {
 
-//    implementation fileTree(dir: 'libs', inclulib_basede: ['*.jar','*.aar'])
-    implementation project(':modulesBase:')
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    implementation project(':modulesBase:lib_base')
+    api  ext.dependencies.wasdolly
     kapt ext.libARouterCompiler
 }

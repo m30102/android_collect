@@ -8,6 +8,8 @@ import android.os.Build.VERSION_CODES.N
 import android.os.LocaleList
 import androidx.annotation.RequiresApi
 import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ThreadUtils
 import com.fan.collect.base.utils.Logger
 import com.hjq.toast.Toaster
 import java.util.Locale
@@ -19,11 +21,11 @@ class MyApp:Application() {
         super.onCreate()
         initArouter()
         Toaster.init(this)
+        ThreadUtils.isMainThread()
     }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-
     }
 
 

@@ -7,7 +7,7 @@ import java.text.MessageFormat;
 
 public class Logger {
 
-	private static final String TAG_DEFAULT = "Fan";
+	private static final String TAG_DEFAULT = "Logger";
 	// 私有化，只调用静态方法
 	private Logger() {
 	}

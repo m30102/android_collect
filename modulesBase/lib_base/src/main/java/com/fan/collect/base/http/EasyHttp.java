@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.blankj.utilcode.util.Utils;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -197,7 +199,6 @@ public class EasyHttp {
 
 
     private void setHeadersToConnection(HttpURLConnection conn) {
-
         if (null == getHeaderMap() || getHeaderMap().isEmpty()) {
             return;
         }

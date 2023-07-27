@@ -1,5 +1,6 @@
 package com.fan.collect.main.study.network
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.net.ConnectivityManager
 import android.os.Build
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.NetworkUtils
+import com.blankj.utilcode.util.PermissionUtils
 import com.fan.collect.base.BaseVBActivity
 import com.fan.collect.base.utils.BlackToast
 import com.fan.collect.base.utils.NetworkUtil
@@ -23,24 +25,18 @@ class NetworkCheckActivity: BaseVBActivity<ActivityNetworkCheckBinding>() {
 
 
     override fun initData() {
-        Log.d(TAG,"initData...")
         Log.e(TAG,"initData...")
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
-
 //        requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
     override fun initView() {
-
-
         binding.btnCheck1.setOnClickListener{
             val networkConnected = NetworkUtil.isNetworkConnected(this);
             val wifiConnected = NetworkUtil.isWifiConnected(this);
@@ -57,10 +53,11 @@ class NetworkCheckActivity: BaseVBActivity<ActivityNetworkCheckBinding>() {
                     modileConnected+"\nmobileNetOpenedRef:"+mobileNetOpenedRef
         }
 
-
+        requestPermissions(arrayOf( Manifest.permission.ACCESS_FINE_LOCATION),1)
         binding.btnCheck2.setOnClickListener {
 
-                NetworkUtil.requestByCell(this)
+//                NetworkUtil.requestByCell(this)
+            NetworkUtil.getActive(this)
         }
     }
 

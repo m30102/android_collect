@@ -9,13 +9,17 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Test {
+
 
 
     public static void dealPreCard() {
@@ -29,6 +33,7 @@ public class Test {
         int a = (int) 2147483647123l;
         System.out.println(a);
         System.out.println(Long.MAX_VALUE);
+
         //        2147483647
         //        2306071459
 //        9223372036854775807
@@ -36,11 +41,59 @@ public class Test {
     }
 
     static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
+    public static void find(Map<String, Integer> map,int target,List<Integer> result,List<List<Integer>> result2){
+
+        System.out.println("target:"+target);
+        List<Integer> values = new ArrayList<>(map.values());
+        Map<String, Integer> mapNext = new HashMap<>();
+        mapNext.putAll(map);
+        for (Map.Entry<String,Integer> entry:map.entrySet()){
+
+            String key = entry.getKey();
+            int value = entry.getValue();
+            int remain = target - value;
+            int index = values.indexOf(remain);
+            if(index > 0 ){
+                System.out.println("key:"+key +" value:"+value+" remain:"+remain+" target:"+target);
+                result.add(value);
+                result.add(remain);
+                result2.add(new ArrayList<>(result));
+                result.clear();
+            }else{
+                result.add(value);
+                System.out.println("key:"+key +" value:"+value+" remain:"+remain+" target:"+target);
+                mapNext.remove(entry.getKey());
+                find(mapNext,remain,result,result2);
+            }
+        }
+    }
+
     public static void main(String[] args) throws SocketException {
-        double v = Double.parseDouble("18.00");
-        int a = (int) (v * 100);
-        System.out.println(v);
-        System.out.println(a);
+
+        Map<String, Integer> map = new HashMap<>();
+        map.put("A", 1);
+        map.put("B", 2);
+        map.put("C", 3);
+        map.put("D", 4);
+        map.put("E", 5);
+        map.put("F", 6);
+        map.put("G", 2);
+        map.put("H", 8);
+
+        int target = 8;
+        ArrayList<Integer> objects = new ArrayList<>();
+        List<List<Integer>> objects2 = new ArrayList<>();
+        find(map,target,objects,objects2);
+        System.out.println(objects2);
+        // 打印结果
+    }
+    public static void test(Map<String, Integer> map,int target,List<Integer> result,List<List<Integer>> result2){
+
+        for(Map.Entry<String,Integer> entry:map.entrySet()){
+            map.remove(entry.getKey());
+        }
     }
 
     public static String getLocalIpV4(final boolean useIPv4) {

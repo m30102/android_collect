@@ -10,8 +10,10 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.NetworkRequest;
+import android.net.TransportInfo;
 import android.os.Build;
 import android.provider.Settings;
+import android.telephony.CellInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -19,7 +21,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,13 +35,17 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.List;
+
+import javax.net.SocketFactory;
 
 
 /**
  * 网络相关工具类
-*      // https://xuxiaoshi.gitee.io/Android%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E5%A4%84%E7%90%86/
-*     // https://www.jianshu.com/p/40fe79d65781
-*     // https://www.codenong.com/cs106329664/   https://blog.csdn.net/android_cai_niao/article/details/106329664 踩坑
+ * // https://xuxiaoshi.gitee.io/Android%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E5%A4%84%E7%90%86/
+ * // https://www.jianshu.com/p/40fe79d65781
+ * // https://www.codenong.com/cs106329664/   https://blog.csdn.net/android_cai_niao/article/details/106329664 踩坑
  */
 public class NetworkUtil {
     private static final String TAG = "NetworkUtil";
@@ -154,7 +162,6 @@ public class NetworkUtil {
     }
 
 
-
     /**
      * 获取网络连接服务
      *
@@ -172,9 +179,6 @@ public class NetworkUtil {
         }
         return connectivityManager;
     }
-
-
-
 
 
     // 判断本机网络是否连接，但不确定真正能连接互联网
@@ -204,13 +208,13 @@ public class NetworkUtil {
         try {
             ConnectivityManager connectivityManager = getConnectivityManager(context);
             // 实际上23就有这个类，但Q版本才标记过时, 保守做法
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 Network activeNetwork = connectivityManager.getActiveNetwork();
                 NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
                 result = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
             } else {
                 NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                result  = networkInfo.isConnected();
+                result = networkInfo.isConnected();
             }
         } catch (Exception e) {
             Log.e(TAG, "isWifiEnable error:" + e.getMessage());
@@ -225,13 +229,13 @@ public class NetworkUtil {
         try {
             ConnectivityManager connectivityManager = getConnectivityManager(context);
             // 实际上23就有这个类，但Q版本才标记过时, 保守做法
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 Network activeNetwork = connectivityManager.getActiveNetwork();
                 NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
                 result = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
             } else {
                 NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-                result  = networkInfo.isConnected();
+                result = networkInfo.isConnected();
             }
         } catch (Exception e) {
             Log.e(TAG, "isWifiEnable error:" + e.getMessage());
@@ -248,26 +252,26 @@ public class NetworkUtil {
         int dataState = telMgr.getDataState();
         int dataActivity = telMgr.getDataActivity();
 
-        Log.e(TAG, "simState:"+simState+" dataState:"+dataState+" dataActivity:"+dataActivity);
+        Log.e(TAG, "simState:" + simState + " dataState:" + dataState + " dataActivity:" + dataActivity);
         // sim卡就绪
-        if(simState != TelephonyManager.SIM_STATE_ABSENT && simState != TelephonyManager.SIM_STATE_UNKNOWN){
+        if (simState != TelephonyManager.SIM_STATE_ABSENT && simState != TelephonyManager.SIM_STATE_UNKNOWN) {
             try {
                 ConnectivityManager connectivityManager = getConnectivityManager(context);
                 Method getMobileDataEnabled = ConnectivityManager.class.getDeclaredMethod("getMobileDataEnabled");
                 getMobileDataEnabled.setAccessible(true);
                 // 开关状态
                 boolean switchEnbabled = (boolean) getMobileDataEnabled.invoke(connectivityManager);
-                if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     try {
-                        Log.e(TAG, "switchEnbabled:"+switchEnbabled);
+                        Log.e(TAG, "switchEnbabled:" + switchEnbabled);
                         switchEnbabled = telMgr.createForSubscriptionId(SubscriptionManager.getDefaultSubscriptionId()).isDataEnabled();
-                        Log.e(TAG, "switchEnbabled26:"+switchEnbabled);
-                    }catch (Exception e){
+                        Log.e(TAG, "switchEnbabled26:" + switchEnbabled);
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
                 // 连接状态
-                boolean dataEnabled = (dataState !=TelephonyManager.DATA_DISCONNECTED  && dataState !=TelephonyManager.DATA_UNKNOWN);
+                boolean dataEnabled = (dataState != TelephonyManager.DATA_DISCONNECTED && dataState != TelephonyManager.DATA_UNKNOWN);
                 result = switchEnbabled && dataEnabled;
             } catch (Exception e) {
                 Log.e(TAG, "reflect MobileDataEnable error");
@@ -275,69 +279,112 @@ public class NetworkUtil {
         }
         return result;
     }
-    public static void requestByCell(Context context){
+
+    public static void getActive(Context context) {
+
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        int phoneType = tm.getPhoneType();
+//        int networkType = tm.getNetworkType();
+        String networkOperator = tm.getNetworkOperator();
+        String networkOperatorName = tm.getNetworkOperatorName();
+        List<CellInfo> allCellInfo = tm.getAllCellInfo();
+
+        LogHelper.d(TAG,"phoneType:"+phoneType+" allCellInfo:"+allCellInfo+" networkOperator:"+networkOperator+" networkOperatorName:"+networkOperatorName);
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetworkInfo != null) {
+            int type = activeNetworkInfo.getType();
+//            ToastUtils.showLong("activeNetworkInfo type:" + type);
+        } else {
+//            ToastUtils.showLong("activeNetworkInfo is null");
+        }
+        Network[] allNetworks = connectivityManager.getAllNetworks();// 模拟器关闭wifi0，开启wifi1,type1 TYPE_WIFI
+//        ToastUtils.showLong("allNetworks:"+allNetworks.length);
+        LogHelper.d(TAG,"allNetworks:"+allNetworks.length);
+        // 自带模拟器2个
+        for(int i=0;i<allNetworks.length;i++){
+            Network netwowrk = allNetworks[i];
+            NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(netwowrk);
+            boolean b = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
+            NetworkInfo networkInfo = connectivityManager.getNetworkInfo(netwowrk);
+            int type = networkInfo.getType();
+            String typeName = networkInfo.getTypeName();
+            //
+        }
+
+    }
+
+    // https://blog.csdn.net/u013710752/article/details/112987021
+    public static void requestByCell(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkRequest.Builder builder = new NetworkRequest.Builder();
         builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
         builder.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
         NetworkRequest request = builder.build();
-        ConnectivityManager.NetworkCallback callback  = new ConnectivityManager.NetworkCallback(){
+        ConnectivityManager.NetworkCallback callback = new ConnectivityManager.NetworkCallback() {
             // 网络连接成功回调 子线程
             @Override
             public void onAvailable(@NonNull Network network) {
                 super.onAvailable(network);
-                LogHelper.i(TAG,"onAvailable:"+Thread.currentThread().getId());
-                connectivityManager.unregisterNetworkCallback(this);
+                NetworkInfo networkInfo = connectivityManager.getNetworkInfo(network);
+                LogHelper.i(TAG, "onAvailable:" + Thread.currentThread().getId() +" networkInfo:"+networkInfo.getTypeName());
+//                connectivityManager.unregisterNetworkCallback(this);
+                String s = network.toString();
+                try {
+                    InetAddress byName = network.getByName("www.baidu.com");
+                    LogHelper.i(TAG, "byName:"+byName.toString());
+                } catch (UnknownHostException e) {
+                    throw new RuntimeException(e);
+                }
             }
+
             // 顺序 onAvailable ->  onCapabilitiesChanged ->  onLinkPropertiesChanged -> onBlockedStatusChanged
             // 网络连接超时或网络不可达
             @Override
             public void onUnavailable() {
                 super.onUnavailable();
-                LogHelper.i(TAG,"onUnavailable");
+                LogHelper.i(TAG, "onUnavailable");
             }
 
             // 网络已断开连接
             @Override
             public void onLost(@NonNull Network network) {
                 super.onLost(network);
-                LogHelper.i(TAG,"onLost");
+                LogHelper.i(TAG, "onLost");
             }
 
             // 网络正在丢失连接
             @Override
             public void onLosing(@NonNull Network network, int maxMsToLive) {
                 super.onLosing(network, maxMsToLive);
-                LogHelper.i(TAG,"onLosing");
+                LogHelper.i(TAG, "onLosing");
             }
 
             //网络状态变化
             @Override
             public void onCapabilitiesChanged(@NonNull Network network, @NonNull NetworkCapabilities networkCapabilities) {
                 super.onCapabilitiesChanged(network, networkCapabilities);
-                LogHelper.i(TAG,"onCapabilitiesChanged");
+                LogHelper.i(TAG, "onCapabilitiesChanged");
             }
 
             //网络连接属性变化
             @Override
             public void onLinkPropertiesChanged(@NonNull Network network, @NonNull LinkProperties linkProperties) {
                 super.onLinkPropertiesChanged(network, linkProperties);
-                LogHelper.i(TAG,"onLinkPropertiesChanged");
+                LogHelper.i(TAG, "onLinkPropertiesChanged");
             }
 
             //访问的网络阻塞状态发生变化
             @Override
             public void onBlockedStatusChanged(@NonNull Network network, boolean blocked) {
                 super.onBlockedStatusChanged(network, blocked);
-                LogHelper.i(TAG,"onBlockedStatusChanged");
+                LogHelper.i(TAG, "onBlockedStatusChanged");
             }
         };
-        LogHelper.i(TAG,"registerNetworkCallback:"+Thread.currentThread().getId());
-        connectivityManager.registerNetworkCallback(request,callback);
-        connectivityManager.requestNetwork(request,callback);
+//        connectivityManager.registerNetworkCallback(request, callback);
+        connectivityManager.requestNetwork(request, callback);
     }
-
-
 
 
     // 流量是否打开，此时wifi可能打开可能关闭
@@ -444,6 +491,7 @@ public class NetworkUtil {
         }
         return networkInfo;
     }
+
     /**
      * 网络是否已经连接了
      *

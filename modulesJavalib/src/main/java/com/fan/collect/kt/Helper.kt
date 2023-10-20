@@ -1,5 +1,7 @@
 package com.fan.collect.kt
 
+import java.util.Arrays
+
 /*
     public final class HelperKt {
         @NotNull
@@ -102,3 +104,7 @@ class Util{
     }
 
  */
+
+fun main(){
+    println(Arrays.toString(listOf(1, 2, 3, 4, 5).toTypedArray()))
+}

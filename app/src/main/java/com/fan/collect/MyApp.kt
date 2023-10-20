@@ -27,12 +27,6 @@ class MyApp:Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
     }
-
-
-
-
-
-
     private fun initArouter() {
         Logger.d("initArouter")
         ARouter.init(this)

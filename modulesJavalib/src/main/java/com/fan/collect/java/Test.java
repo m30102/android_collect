@@ -11,6 +11,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.TreeMap;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
@@ -57,13 +59,17 @@ public class Test {
 
     }
 
-    public static void main(String[] args)  {
-        String ori = "https://pt-static.game-ark.com/appinit.js?t=1697613241048";
-        try {
-            URL url = new URL(ori);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+     void run(){
+        ClassLoader classLoader = Test.class.getClassLoader();
+         System.out.println();
+        while(classLoader !=null){
+            System.out.println("classLoader:"+classLoader);
+            classLoader = classLoader.getParent();
         }
+    }
+    public static void main(String[] args)  {
+
+    new Test().run();
     }
 
     private static void countdown() throws InterruptedException {

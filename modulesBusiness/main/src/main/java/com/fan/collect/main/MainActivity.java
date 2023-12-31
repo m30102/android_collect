@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainMainBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.e("MainActivityTAG","onCreate");
         super.onCreate(savedInstanceState);
         binding = ActivityMainMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -41,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, MulLanguage.class));
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("MainActivityTAG","onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("MainActivityTAG","onResume");
     }
 
     @Override

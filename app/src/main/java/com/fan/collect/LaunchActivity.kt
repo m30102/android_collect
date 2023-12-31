@@ -1,6 +1,7 @@
 package com.fan.collect
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.DimenRes
@@ -86,18 +87,10 @@ class LaunchActivity : Activity() {
             ARouter.getInstance().build(NaviConst.ACTIVITY_MAIN)
                     .navigation()
         }
-
-
         Log.e("LaunchActivityTAG","onCreate onCreate onCreate");
-
-        Thread{
-            request()
-        }.start()
-
-        ThreadUtils.getSinglePool()
     }
 
-    fun request(){
+    /*fun request(){
         val  a  = EasyHttp("https://www.mxnzp.com/api/daily_word/recommend?app_secret=your&app_id=your")
         a.access()
         if(a.success()){
@@ -106,21 +99,34 @@ class LaunchActivity : Activity() {
         }else{
             Log.e("LaunchActivityTAG", a.httpCode.toString() + a.httpAccessErrMsg)
         }
-    }
+    }*/
 
+    override fun onStart() {
+        super.onStart()
+        Log.e("LaunchActivityTAG","onStart onStart onStart");
+    }
+    override fun onRestart() {
+        super.onRestart()
+        Log.e("LaunchActivityTAG","onRestart onRestart onRestart");
+    }
     override fun onResume() {
         super.onResume()
         Log.e("LaunchActivityTAG","onResume onResume onResume");
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.e("LaunchActivityTAG","onPause onPause onPause");
+    }
+
     override fun onStop() {
         super.onStop()
-        Log.e("LaunchActivityTAG","onstop onstop onstop");
+        Log.e("LaunchActivityTAG","onStop onStop onStop");
 
     }
 
     override fun onDestroy() {
-        Log.e("LaunchActivityTAG","onDestroyonDestroyonDestroy");
         super.onDestroy()
+        Log.e("LaunchActivityTAG","onDestroy onDestroy onDestroy");
     }
 }

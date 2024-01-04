@@ -6,23 +6,24 @@ apply from : '../common.gradle'
 android {
 
     defaultConfig {
-        applicationId "com.fan.collect"
+//        applicationId "com.fan.collect"
+        applicationId "com.arkgames.rod"
     }
 
 
     signingConfigs {
         debug {
-            storeFile file('keystores/lon_sjzt2.jks')
-            storePassword '^H&J*K'
-            keyAlias 'lon_sea'
-            keyPassword '^H&J*K'
+            storeFile file('keystores/mytest.jks')
+            storePassword '123456'
+            keyAlias 'name1'
+            keyPassword '123456'
         }
 
         release {
-            storeFile file('keystores/lon_sjzt2.jks')
-            storePassword '^H&J*K'
-            keyAlias 'lon_sea'
-            keyPassword '^H&J*K'
+            storeFile file('keystores/mytest.jks')
+            storePassword '123456'
+            keyAlias 'name1'
+            keyPassword '123456'
         }
 
     }
@@ -31,6 +32,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+        }
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
 

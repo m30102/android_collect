@@ -12,7 +12,7 @@ rootProject.name = "android_collect"
 include ':app'
 include ':modulesBusiness:main'
 include ':modulesBase:lib_base'
-include ':modulesBusiness:login'
+//include ':modulesBusiness:login'
 include ':modulesBusiness:share'
 include ':modulesBase:lib_widget'
 include ':modulesJavalib'

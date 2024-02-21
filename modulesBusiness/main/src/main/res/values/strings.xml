@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">android_collect_main</string>
-    <string name="google_play_app_id">833529546451</string>
+    <!--<string name="google_play_app_id">833529546451</string>-->  <!-- 两个换着用-->
+    <string name="google_play_app_id">709899396670</string><!-- 来源于战龙apk包 -->
 </resources>

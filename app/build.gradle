@@ -6,6 +6,7 @@ apply from : '../common.gradle'
 android {
 
     defaultConfig {
+        namespace 'com.fan.collect'
 //        applicationId "com.fan.collect"
         applicationId "com.arkgames.rod"
     }

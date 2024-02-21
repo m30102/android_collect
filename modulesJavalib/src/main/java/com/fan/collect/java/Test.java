@@ -5,8 +5,11 @@ import java.net.MalformedURLException;
 import java.net.SocketException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -24,6 +27,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.LockSupport;
+import java.util.stream.Collectors;
 
 public class Test {
 
@@ -67,9 +71,18 @@ public class Test {
             classLoader = classLoader.getParent();
         }
     }
-    public static void main(String[] args)  {
 
-        new Test().run();
+    static enum A{
+        a,b,c;
+    }
+
+    private List<String> privacyChannels = new ArrayList<>();
+    {
+        privacyChannels.add("douyin");
+        privacyChannels.add("jingyou");
+    }
+    public static void main(String[] args)  {
+        System.out.println(Integer.MAX_VALUE);
     }
 
     private static void countdown() throws InterruptedException {

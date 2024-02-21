@@ -17,6 +17,9 @@
         <activity android:name="com.fan.collect.main.study.language.MulLanguage" android:configChanges="locale" ></activity>
         <activity android:name="com.fan.collect.main.study.google.GoogleLoginActivity"></activity>
 
+
+<!--https://developers.google.com/games/services/android/quickstart?hl=zh-cn-->
         <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/google_play_app_id"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
     </application>
 </manifest>

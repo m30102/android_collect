@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseVBActivity<VB : ViewBinding>() : AppCompatActivity() {
-
     val TAG:String = javaClass.simpleName + "TAG"
 
     protected lateinit var binding:VB

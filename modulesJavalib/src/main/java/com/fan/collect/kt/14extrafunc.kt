@@ -4,6 +4,13 @@ import java.lang.StringBuilder
 import kotlin.math.max
 
 // 扩展函数
+/*
+fun ClassName.methodName(param1: Int, param2: Int): Int {
+    return 0
+}
+*/
+
+
 fun String.lettersCount(): Int {
 
     var count = 0
@@ -49,7 +56,6 @@ fun test(block:StringBuilder.()->Unit){
 //    block()// 不能直接调用。因为是定义在StringBuilder上的
     StringBuilder().block()
 }
-
 
 
 fun test2(o:(Int,Int) -> Int){

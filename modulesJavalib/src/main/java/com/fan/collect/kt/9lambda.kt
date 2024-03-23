@@ -24,7 +24,7 @@ fun main() {
     //集合中的map函数是最常用的一种函数式API，它用于将集合中的每个元素都映射成一个另外的值，映射的规则在Lambda表达式中指定，最终生成一个新的集合。
     val list2 = listOf("Apple", "Banana", "Orange", "Pear", "Grape", "Watermelon")
     val newList = list2.filter { it.length <= 5 }
-            .map { it.toUpperCase(Locale.getDefault()) }
+            .map { it.uppercase() }
     for (fruit in newList) {
         println(fruit)
     }

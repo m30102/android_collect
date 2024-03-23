@@ -32,16 +32,19 @@ import java.util.stream.Collectors;
 public class Test {
 
 
-    interface Action{
+    interface Action {
         void doAction();
     }
+
     static Map<Integer, Action> actions = new HashMap();
+
     static {
         actions.put(1, (Action) () -> System.out.println("doAction1"));
         actions.put(2, (Action) () -> System.out.println("doAction2"));
         actions.put(3, (Action) () -> System.out.println("doAction3"));
     }
-    public static void what2do(int actionId){
+
+    public static void what2do(int actionId) {
         Optional.ofNullable(actions.get(actionId))
                 .orElse(() -> System.out.println("action default"))
                 .doAction();
@@ -49,13 +52,13 @@ public class Test {
 
     boolean needUpdate = true;
 
-    public void checkUpdate(){
+    public void checkUpdate() {
         new Thread(() -> {
 
-            
+
             int currentVersion = 1;
             int serverVerion = 3;
-            if(currentVersion < serverVerion){
+            if (currentVersion < serverVerion) {
                 needUpdate = true;
             }
         }).start();
@@ -63,37 +66,62 @@ public class Test {
 
     }
 
-     void run(){
+    void run() {
         ClassLoader classLoader = Test.class.getClassLoader();
-         System.out.println();
-        while(classLoader !=null){
-            System.out.println("classLoader:"+classLoader);
+        System.out.println();
+        while (classLoader != null) {
+            System.out.println("classLoader:" + classLoader);
             classLoader = classLoader.getParent();
         }
     }
 
-    static enum A{
-        a,b,c;
+    static enum A {
+        a, b, c;
     }
 
     private List<String> privacyChannels = new ArrayList<>();
+
     {
         privacyChannels.add("douyin");
         privacyChannels.add("jingyou");
     }
-    public static void main(String[] args)  {
-        System.out.println(Integer.MAX_VALUE);
+
+    public static void main(String[] args) {
+
+
+//        int[] arr = new int[]{1, 1, 1, 2, 1, 1, 1};
+//        int[] arr = new int[]{2, 1, 1, 1, 1, 1, 1};
+//        int[] arr = new int[]{1, 1, 1, 1, 1, 1, 2};
+        int[] arr = new int[]{1, 2, 1, 1, 1, 1, 1};
+        int res = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            int n1 = arr[i];
+            int n2 = arr[i + 1];
+
+            if ((n1 + n2) != n1 * 2) {
+                int nextIndex = i + 2;
+                if (i + 2 >= arr.length) {
+                    nextIndex = 0;
+                }
+                if (n1 == arr[nextIndex]) {
+                    res = n2;
+                } else {
+                    res = n1;
+                }
+            }
+        }
+        System.out.println(res);
     }
 
     private static void countdown() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(0);
         task1(value -> {
             countDownLatch.countDown();
-            System.out.println("countDownLatch:"+countDownLatch.getCount());
+            System.out.println("countDownLatch:" + countDownLatch.getCount());
         });
         task2(value -> {
             countDownLatch.countDown();
-            System.out.println("countDownLatch:"+countDownLatch.getCount());
+            System.out.println("countDownLatch:" + countDownLatch.getCount());
         });
         System.out.println("await " + System.currentTimeMillis());
         new Thread(() -> {
@@ -110,13 +138,15 @@ public class Test {
         Thread.sleep(5000);
     }
 
-    public interface CompleteListener{
+    public interface CompleteListener {
         void complete(String value);
     }
-    public static void task1(CompleteListener completeListener){
-         completeListener.complete("1");
+
+    public static void task1(CompleteListener completeListener) {
+        completeListener.complete("1");
     }
-    public static void task2(CompleteListener completeListener){
+
+    public static void task2(CompleteListener completeListener) {
         new Thread(() -> {
             try {
                 Thread.sleep(5000);
@@ -126,9 +156,9 @@ public class Test {
             }
         }).start();
     }
-    public static void task3(){}
 
-
+    public static void task3() {
+    }
 
 
     public static class MedalService {

@@ -42,9 +42,17 @@ class Money(val value: Int) {
     }
 }
 
+fun aa(a :Int):Int{
+    var b = a;
+    repeat(3){
+        b = b +3
+    }
+    return b
+}
 
 
 fun main() {
+    println(aa(5))
     val m1 = Money(12);
     m1()
     val m2 = Money(1);

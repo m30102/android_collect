@@ -4,7 +4,8 @@ import kotlinx.coroutines.*
 // 协程可以用单线程模拟多线程
 fun main() {
 //    test0()
-    test11()
+//    test11()
+//    test1()
 //    test2()
 //    test3()
 //    test4()
@@ -24,7 +25,10 @@ fun test0(){
     // 顶层协程会在main结束后一块结束,所以这里来不及打印
     GlobalScope.launch {
         println("aaaaa")
+        println("in.."+Thread.currentThread().id)// 24
     }
+    println("out.."+Thread.currentThread().id)// 1
+    Thread.sleep(1000)
 }
 private fun test11(){
     test1()
@@ -71,7 +75,7 @@ fun test2(){
         }
         println("runBlocking end!")
     }
-    println("runBlocking finished!")
+    println("runBlocking finished!"+Thread.currentThread().id)
 }
 // 可以开启10W个协程，但不能开启10W个线程
 fun test3(){

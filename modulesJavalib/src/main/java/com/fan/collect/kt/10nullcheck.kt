@@ -7,7 +7,13 @@ fun main() {
 //    val a:Study? = null;
 //    doStudy(a);// 编译报错
 //    doStudy(null)// 编译报错
+    print( getLenth(null))
+    printParams1()
 }
+fun printParams1(num: Int=100, str: String="asd") {
+    println("num is $num , str is $str")
+}
+
 //Kotlin默认所有的参数和变量都不可为空，所以这里传入的Study参数也一定不会为空 //    doStudy(null);// 编译报错
 fun doStudy(study: Study) {
     study.readBooks()
@@ -41,7 +47,13 @@ fun doStudy5(){
     study?.let {
         it.readBooks() // OK
     }
+
 }
+
+fun getLenth(text: String?): Int? {
+    return text?.length
+}
+
 // ?.  ?: 类似三元  左右两边表达式 为空则返回0 否则返回length
 fun getTextLength(text: String?) = text?.length ?: 0
 

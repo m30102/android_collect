@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.btnComponent.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ComponentsDemo.class));
+            int i = 1/0;
+//            startActivity(new Intent(MainActivity.this, ComponentsDemo.class));
+
         });
         binding.btnCustomview.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, CustomViewActivity.class));

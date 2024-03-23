@@ -258,7 +258,7 @@ fun main() {
 //    doOutterFun()
 //    pintStringTest()
     testRunnable()
-    busy()
+//    busy()
 }
 
 inline fun innerReturn(){
@@ -270,8 +270,6 @@ inline fun innerReturn(){
 
 private fun testRunnable() {
     runRunnable0 {  println("0") }
-
-
     runRunnable1 {  println("1") }
     runRunnable {
         var a = 2;

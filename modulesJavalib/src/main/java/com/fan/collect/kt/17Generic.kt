@@ -1,8 +1,6 @@
 package com.fan.collect.kt
 
-import java.util.Collections
 
-// https://zhuanlan.zhihu.com/p/371232419
 fun <T> method(param:T):T{
     return param
 }

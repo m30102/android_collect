@@ -53,14 +53,16 @@ public class MNView extends View {
 
         //onMeasure width:1073741824_1080_MeasureSpec: EXACTLY 1080
         //onMeasure height:1073741824_300_MeasureSpec: EXACTLY 300
-        Logger.d("onMeasure width:"+widthSpecMode+"_"+widthSpecWidth+"_"+MeasureSpec.toString(widthMeasureSpec));
-        Logger.d("onMeasure height:"+heightSpecMode+"_"+heightSpecWidth+"_"+MeasureSpec.toString(heightMeasureSpec));
+        //onMeasure width:-2147483648_1920_MeasureSpec: AT_MOST 1920
+        Logger.d(TAG,"onMeasure width:"+widthSpecMode+"_"+widthSpecWidth+"_"+MeasureSpec.toString(widthMeasureSpec));
+        Logger.d(TAG,"onMeasure height:"+heightSpecMode+"_"+heightSpecWidth+"_"+MeasureSpec.toString(heightMeasureSpec));
         if(widthSpecMode == MeasureSpec.EXACTLY){
             //match_parent 或者 具体数值
             mWidth = widthSpecWidth;
         }else if(widthSpecMode == MeasureSpec.AT_MOST){
-            // wrap_content:AT_MOST.  如果这里不指定，那么父控件会传父控件的宽度给到子控件
+            // wrap_content:AT_MOST.  如果这里不指定，那么父控件会传父控件的宽度给到子控件 .onMeasure width:-2147483648_1920_MeasureSpec: AT_MOST 1920
             mWidth = mTextBounds.width()+getPaddingLeft()+getPaddingRight();
+//            mWidth = widthSpecWidth;//at most = 父控件
         }
 
         if(heightSpecMode == MeasureSpec.EXACTLY){

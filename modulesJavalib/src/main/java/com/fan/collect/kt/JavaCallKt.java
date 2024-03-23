@@ -33,6 +33,7 @@ public class JavaCallKt {
 
     private static void staticCall() {
         HelperKt.doSomething();
+        Util.Companion.func2();
         Util.func2();
         ConstantsMt.INSTANCE.func1();
         String a = Util.asd;

@@ -240,7 +240,7 @@ inline fun runRunnable1( block: () -> Unit) {
 }
 
 // 内联函数的lambda(就是这个block)允许使用return,return调内联和lambda的后面流程，但在匿名类runnable中不允许使用return. crossinline表示block一定不会使用return.才可以在runnable中使用,也可以return runnable
-inline fun runRunnable(crossinline block: () -> Unit) {
+    inline fun runRunnable(crossinline block: () -> Unit) {
     val runnable = Runnable {
         block()
         return@Runnable

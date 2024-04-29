@@ -1,6 +1,7 @@
 package com.fan.collect.java;
 
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketException;
 import java.net.URL;
@@ -88,29 +89,13 @@ public class Test {
 
     public static void main(String[] args) {
 
-
-//        int[] arr = new int[]{1, 1, 1, 2, 1, 1, 1};
-//        int[] arr = new int[]{2, 1, 1, 1, 1, 1, 1};
-//        int[] arr = new int[]{1, 1, 1, 1, 1, 1, 2};
-        int[] arr = new int[]{1, 2, 1, 1, 1, 1, 1};
-        int res = 0;
-        for (int i = 0; i < arr.length - 1; i++) {
-            int n1 = arr[i];
-            int n2 = arr[i + 1];
-
-            if ((n1 + n2) != n1 * 2) {
-                int nextIndex = i + 2;
-                if (i + 2 >= arr.length) {
-                    nextIndex = 0;
-                }
-                if (n1 == arr[nextIndex]) {
-                    res = n2;
-                } else {
-                    res = n1;
-                }
-            }
+        try {
+            throw new IOException("AA");
+        }catch (IOException e){
+            System.out.println("aaaa");
+            e.printStackTrace();
         }
-        System.out.println(res);
+
     }
 
     private static void countdown() throws InterruptedException {

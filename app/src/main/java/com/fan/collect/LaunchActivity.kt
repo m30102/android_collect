@@ -5,6 +5,7 @@ import android.app.ActivityManager
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.DimenRes
+import androidx.core.os.ConfigurationCompat
 import androidx.fragment.app.DialogFragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ScreenUtils
@@ -32,8 +33,6 @@ class LaunchActivity : Activity() {
         val displayMetrics2 = application.resources.displayMetrics
         Log.e("TestActivity", "density2:"+displayMetrics2.density)
         Log.e("TestActivity", "scaledDensity2:"+displayMetrics2.scaledDensity)
-
-
     }
 
     fun resDp2px(@DimenRes dpId: Int): Int {

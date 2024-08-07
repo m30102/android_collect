@@ -88,14 +88,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
-       int x = 100003202;
-       int y = 100002110;// 十位得20 或者10
-        System.out.println("result1:"+(x % 100));
-        System.out.println("result2:"+(x % 100)/10);
-
-        System.out.println("result3:"+(y % 100));
-        System.out.println("result4:"+(y % 100)/10);
-
+        System.out.println(Integer.MAX_VALUE);
     }
 
     private static void countdown() throws InterruptedException {

@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fan.collect.base.constance.NaviConst;
 import com.fan.collect.main.study.activity.launch.singletask.ComponentsDemo;
 import com.fan.collect.main.study.google.GoogleLoginActivity;
+import com.fan.collect.main.study.image.ImageoptActivity;
 import com.fan.collect.main.study.language.MulLanguage;
 import com.fan.collect.main.study.network.NetworkCheckActivity;
 import com.fan.collect.main.study.view.CustomViewActivity;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         });
         binding.btnLoginGoogle.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, GoogleLoginActivity.class));
+        });
+        binding.btnGallery.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ImageoptActivity.class));
         });
 
     }

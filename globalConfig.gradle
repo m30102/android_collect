@@ -2,9 +2,9 @@ ext {
     isDebug = false
 
     android = [
-            compileSdkVersion: 31,
+            compileSdkVersion: 33,
             minSdkVersion    : 23,
-            targetSdkVersion : 30,
+            targetSdkVersion : 33,
             buildToolsVersion: "30.0.3",
             versionCode      : 1697610515,
             versionName      : "1.109.101801",

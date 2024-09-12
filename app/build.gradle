@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         namespace 'com.fan.collect'
-//        applicationId "com.fan.collect"
-        applicationId "com.arkgames.rod"
+        applicationId "com.fan.collect"
+//        applicationId "com.arkgames.rod"
 
         manifestPlaceholders = [
                 XG_ACCESS_ID : "1580018760",

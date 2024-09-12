@@ -18,6 +18,8 @@ import com.fan.collect.main.study.view.CustomViewActivity;
 import com.fan.collect.module.main.databinding.ActivityMainMainBinding;
 import java.util.HashMap;
 
+import okhttp3.internal.tls.OkHostnameVerifier;
+
 @Route(path = NaviConst.ACTIVITY_MAIN)
 public class MainActivity extends AppCompatActivity {
 
@@ -51,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btnGallery.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, ImageoptActivity.class));
         });
-
     }
 
     @Override

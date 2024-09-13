@@ -1,0 +1,3 @@
+C:\work\ide\mingw64\bin\cmake.exe -E rm -f CMakeFiles\appmk.dir/objects.a
+C:\work\ide\mingw64\bin\ar.exe qc CMakeFiles\appmk.dir/objects.a @CMakeFiles\appmk.dir\objects1.rsp
+C:\work\ide\mingw64\bin\c++.exe -Wl,--whole-archive CMakeFiles\appmk.dir/objects.a -Wl,--no-whole-archive -o D:\work\android\android_collect\cmakedemo\src\staticlib\appmk.exe -Wl,--out-implib,D:\work\android\android_collect\cmakedemo\src\staticlib\libappmk.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\appmk.dir\linkLibs.rsp

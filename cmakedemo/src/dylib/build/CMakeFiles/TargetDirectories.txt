@@ -1,0 +1,3 @@
+D:/work/android/android_collect/cmakedemo/src/dylib/build/CMakeFiles/appmk.dir
+D:/work/android/android_collect/cmakedemo/src/dylib/build/CMakeFiles/edit_cache.dir
+D:/work/android/android_collect/cmakedemo/src/dylib/build/CMakeFiles/rebuild_cache.dir

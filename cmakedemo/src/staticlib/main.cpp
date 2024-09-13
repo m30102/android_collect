@@ -23,5 +23,6 @@ int main()
     printf("a / b = %f\n", divide(a, b));
     
     std::cout << "Hello, CMake!!!" << std::endl;
+    system("pause");
     return 0;
 }

@@ -1,3 +1,0 @@
-D:/work/android/android_collect/cmakedemo/src/staticlib/build/CMakeFiles/appmk.dir
-D:/work/android/android_collect/cmakedemo/src/staticlib/build/CMakeFiles/edit_cache.dir
-D:/work/android/android_collect/cmakedemo/src/staticlib/build/CMakeFiles/rebuild_cache.dir

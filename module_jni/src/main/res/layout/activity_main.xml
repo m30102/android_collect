@@ -4,9 +4,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        android:id="@+id/btn_java2cpp"
-        android:text="JAVA传递给C++"
+        android:id="@+id/btn_str2cpp"
+        android:text="JAVA传递字符串"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></Button>
+
+    <Button
+            android:id="@+id/btn_intArr2cpp"
+            android:text="JAVA传递int数组"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Button>
+    <Button
+            android:id="@+id/btn_strArr2cpp"
+            android:text="JAVA传递string数组"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Button>
+
+    <Button
+            android:id="@+id/btn_cppCallJavaStatic"
+            android:text="c++调java静态方法"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Button>
+
+    <Button
+            android:id="@+id/btn_cppGetJavaStatic"
+            android:text="c++调java静态属性"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Button>
+
+
+    <Button
+            android:id="@+id/btn_cppGetJavaObj"
+            android:text="c++调java实例属性方法"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Button>
 </LinearLayout>

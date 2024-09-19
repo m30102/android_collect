@@ -66,6 +66,8 @@ class MyApp:Application() {
                 return super.onCrashHandleStart2GetExtraDatas(crashType, errorType, errorMsg, errorStack)
             }
         })
+//        CrashReport.initCrashReport(this,"7213fc90a1",true, u)
+        Log.e(TAG,"initCrashReport")
         CrashReport.initCrashReport(this,"7213fc90a1",true, u)
     }
 

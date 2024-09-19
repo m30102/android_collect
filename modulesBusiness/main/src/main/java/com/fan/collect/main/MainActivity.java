@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fan.collect.base.constance.NaviConst;
 import com.fan.collect.main.study.activity.launch.singletask.ComponentsDemo;
+import com.fan.collect.main.study.facebook.FaceBookLoginActivity;
 import com.fan.collect.main.study.google.GoogleLoginActivity;
 import com.fan.collect.main.study.image.ImageoptActivity;
 import com.fan.collect.main.study.language.MulLanguage;
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         });
         binding.btnLoginGoogle.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, GoogleLoginActivity.class));
+        });
+        binding.btnLoginFacebook.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, FaceBookLoginActivity.class));
         });
         binding.btnGallery.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, ImageoptActivity.class));

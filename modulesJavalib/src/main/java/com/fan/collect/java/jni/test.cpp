@@ -1,7 +1,7 @@
 #include "com_fan_collect_java_jni_JniTest.h"
 #include <stdio.h>
 
-static char *str = NULL;
+
 JNIEXPORT jstring JNICALL Java_com_fan_collect_java_jni_JniTest_get
         (JNIEnv *env, jobject thiz)
 {
@@ -12,10 +12,16 @@ JNIEXPORT jstring JNICALL Java_com_fan_collect_java_jni_JniTest_get
     return env->NewStringUTF("default str from C++!");
 }
 
+
+static char *str = NULL;
 JNIEXPORT void JNICALL Java_com_fan_collect_java_jni_JniTest_set
 (JNIEnv *env,jobject thiz,
         jstring string){
+            
     str = (char*)env->GetStringUTFChars(string,NULL);
     printf("invoke set from C++, %s\n ",str);
+    printf("%p__\n",str);
     env->ReleaseStringUTFChars(string,str);
+    printf("%p__%s\n",str,str);
+
 }

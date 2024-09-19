@@ -26,11 +26,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.games.Games;
 //import com.google.android.gms.games.GamesSignInClient;
@@ -205,6 +203,9 @@ public class GoogleLoginActivity extends BaseVBActivity<ActivityLoginGoogleBindi
         });
         binding.btnLogout.setOnClickListener(v -> {
             logout();
+        });
+        binding.btnUmp.setOnClickListener(v -> {
+            startActivity(new Intent(this, GoogleUmpActivity.class));
         });
     }
 

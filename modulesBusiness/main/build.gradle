@@ -28,14 +28,14 @@ android {
 dependencies {
     implementation project(':modulesBase:lib_base')
     implementation 'com.google.android.gms:play-services-auth:21.2.0'
-//    implementation 'com.google.android.gms:play-services-auth:18.0.0'
     implementation 'com.google.android.gms:play-services-games:23.2.0'
 //    https://developers.google.cn/games/services/android/signin
-//    implementation 'com.google.android.gms:play-services-games-v2:19.0.0'
     implementation "com.android.billingclient:billing:6.0.1"
     kapt ext.libARouterCompiler
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation 'net.aihelp:android-aihelp-aar:4.6.+'
+    implementation 'com.facebook.android:facebook-login:17.0.2'
+    implementation 'com.google.android.ump:user-messaging-platform:3.0.0'
 
 }

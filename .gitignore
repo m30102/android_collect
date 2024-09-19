@@ -15,3 +15,5 @@
 local.properties
 /.idea
 /modulesJavalib/bin
+/cmakedemo/src/dylib/build
+/cmakedemo/src/staticlib/build

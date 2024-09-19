@@ -26,8 +26,9 @@ class ImageoptActivity: BaseVBActivity<ActivityImageOptBinding>() {
 
     override fun initView() {
         binding.btnSaveImgGallery.setOnClickListener {
-            val suc = ImageUtil.saveToGallery(this, bitmap)
-            Log.e(TAG, "保存图片到相册...suc:$suc");
+             var i = 1/0;
+        /*    val suc = ImageUtil.saveToGallery(this, bitmap)
+            Log.e(TAG, "保存图片到相册...suc:$suc");*/
         }
 
         binding.btnSaveImgSanbox.setOnClickListener {

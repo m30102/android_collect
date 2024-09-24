@@ -17,3 +17,4 @@ local.properties
 /modulesJavalib/bin
 /cmakedemo/src/dylib/build
 /cmakedemo/src/staticlib/build
+/app/keystores/.idea

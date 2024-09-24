@@ -6,11 +6,20 @@ import org.apache.commons.codec.binary.Base64;
 
 
 public class Test {
+    public void test(){
+        System.out.println("-----");
+    }
+    public boolean isA(){
+        return true;
+    }
 
     public static void main(String[] args) {
-
-        byte[] bytes = Base64.encodeBase64("12321eqedqwdxe123333333333333333333333asd333szxc阿萨大大阿萨德阿wdxe123333333333333333333333asd333szxc阿萨大大阿萨德阿萨德asddadasd".getBytes(),true);
-        java.lang.String s = new java.lang.String(bytes);
-        System.out.println(s);
+        Test test = new Test();
+        test = null;
+        if(test == null && test.isA()){
+            System.out.println("qqqq");
+        }else{
+            System.out.println("ccccc");
+        }
     }
 }

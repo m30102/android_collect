@@ -4,12 +4,17 @@ import com.fan.collect.base.BaseVBActivity
 import com.fan.collect.base.utils.LogHelper
 import com.fan.collect.module.main.databinding.ActivityGoogleUmpBinding
 import com.google.android.ump.ConsentDebugSettings
-import com.google.android.ump.ConsentForm
-import com.google.android.ump.ConsentForm.OnConsentFormDismissedListener
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
-import com.google.android.ump.FormError
 import com.google.android.ump.UserMessagingPlatform
+import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.FirebaseAnalytics.ConsentType
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.app
+import com.google.firebase.ktx.initialize
+import java.util.EnumMap
 
 
 /**
@@ -20,8 +25,8 @@ import com.google.android.ump.UserMessagingPlatform
  * http://www.yunbu.me/sdk/overseas/doc/Android_SDK.html
  * https://docs.tradplusad.com/docs/tradplussdk_android_doc_v6/privacy_policy/google_ump
  *
+ * 管理用户意见征求设置（应用）
  * https://developers.google.com/tag-platform/security/guides/app-consent?hl=zh-cn&consentmode=basic&platform=android
- *
  * https://developers.google.com/admob/android/quick-start?hl=zh-cn
  * 官方测试ca-app-pub-3940256099942544~3347511713
  */
@@ -30,12 +35,24 @@ class GoogleUmpActivity : BaseVBActivity<ActivityGoogleUmpBinding>() {
     private lateinit var consentInformation: ConsentInformation;
 
     override fun initData() {
-
+       /*
+        需要google-services.json
+        FirebaseApp.initializeApp(this)
+        Firebase.analytics.setConsent(
+            EnumMap<ConsentType, FirebaseAnalytics.ConsentStatus>(
+                ConsentType::class.java
+            ).apply {
+                put(ConsentType.ANALYTICS_STORAGE, FirebaseAnalytics.ConsentStatus.GRANTED)
+                put(ConsentType.AD_STORAGE, FirebaseAnalytics.ConsentStatus.GRANTED)
+                put(ConsentType.AD_USER_DATA, FirebaseAnalytics.ConsentStatus.GRANTED)
+                put(ConsentType.AD_PERSONALIZATION, FirebaseAnalytics.ConsentStatus.GRANTED)
+            })*/
     }
 
     override fun initView() {
-        initUmp()
 
+
+        initUmp()
     }
 
     private fun initUmp() {
@@ -57,11 +74,17 @@ class GoogleUmpActivity : BaseVBActivity<ActivityGoogleUmpBinding>() {
         consentInformation.requestConsentInfoUpdate(this, params,
             {
                 // 同意信息状态已更新，可以开始加载协议内容
-                LogHelper.e(TAG, "onConsentInfoUpdateSuccess consentFormAvailable:"+consentInformation.isConsentFormAvailable)
+                LogHelper.e(
+                    TAG,
+                    "onConsentInfoUpdateSuccess consentFormAvailable:" + consentInformation.isConsentFormAvailable
+                )
                 UserMessagingPlatform.loadAndShowConsentFormIfRequired(this) { err ->
-                    LogHelper.e(TAG, "onConsentFormDismissed err:" + err?.errorCode + " msg:" + err?.message)
-                    LogHelper.e(TAG, "canRequestAds:"+consentInformation.canRequestAds())
-                    if(consentInformation.canRequestAds()){
+                    LogHelper.e(
+                        TAG,
+                        "onConsentFormDismissed err:" + err?.errorCode + " msg:" + err?.message
+                    )
+                    LogHelper.e(TAG, "canRequestAds:" + consentInformation.canRequestAds())
+                    if (consentInformation.canRequestAds()) {
                         // Consent has been gathered
                         // 授权完成,初始化SDK
                     }
@@ -69,11 +92,14 @@ class GoogleUmpActivity : BaseVBActivity<ActivityGoogleUmpBinding>() {
             },
             { err ->
                 // Consent gathering failed. 请求失败，处理异常
-                LogHelper.e(TAG, "onConsentInfoUpdateFailure err:" + err.errorCode + " msg:" + err.message)
+                LogHelper.e(
+                    TAG,
+                    "onConsentInfoUpdateFailure err:" + err.errorCode + " msg:" + err.message
+                )
             })
 
         if (consentInformation.canRequestAds()) {
-                // 授权完成,初始化SDK
+            // 授权完成,初始化SDK
         }
     }
 

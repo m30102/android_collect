@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
 
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    compileSdkVersion 34
 //    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {

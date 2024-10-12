@@ -12,6 +12,6 @@ class MyClass {
 fun main() {
 //    val id = "12345"
 //    UUID.nameUUIDFromBytes(id.by)
-
+//    cn.hutool.core.text.UnicodeUtil
 
 }

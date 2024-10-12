@@ -18,3 +18,5 @@ local.properties
 /cmakedemo/src/dylib/build
 /cmakedemo/src/staticlib/build
 /app/keystores/.idea
+/modulesJavalib/src/main/java/com/fan/collect/java/jni/struct_test.exe
+/modulesJavalib/src/main/java/com/fan/collect/java/jni/struct_test2.exe

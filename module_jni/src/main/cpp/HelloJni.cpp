@@ -22,19 +22,20 @@ Java_com_fan_interview_HelloJni_printMsg(JNIEnv *env, jobject thiz, jstring msg)
     LOGI("printMsg %p %s",str_noCopy,str_noCopy);//  printMsg 0x7fff6a57cb90 123qwe
 
     */
-
-
     jboolean isCopy;
-    LOGI("isCopy1: %d",isCopy);// isCopy1: 0
+    LOGI("isCopy before: %d",isCopy);// isCopy1: 0
 //    const char *str_copy = (char*) env->GetStringUTFChars(msg, &isCopy);
     const char *str_copy =  env->GetStringUTFChars(msg, &isCopy);//utf-8
-    jsize size = env->GetStringLength(msg);//
-    LOGI("printMsg 指针:%p 内容:%s 长度:%d ",str_copy,str_copy,size);
+    jsize size = env->GetStringLength(msg);
+    jsize sizeUtf = env->GetStringUTFLength(msg);
+    LOGI("printMsg 指针:%p 内容:%s GetStringLength长度:%d ",str_copy,str_copy,size);
+    LOGI("printMsg 指针:%p 内容:%s GetStringUTFLength长度:%d ",str_copy,str_copy,sizeUtf);
     // GetStringUTFLength 指针:0x7fff6a77cac8 内容:123qwe 长度:6   字节长度
     // GetStringUTFLength 指针:0x7fff6a700cf0 内容:123qwe是 长度:9  字节长度
     // GetStringLength 指针:0x7fff6a700d60 内容:123qwe是 长度:7
-    LOGI("isCopy2: %d",isCopy);// isCopy2: 1
+    LOGI("isCopy after: %d",isCopy);// isCopy2: 1
     env->ReleaseStringUTFChars(msg,str_copy);
+//    (*env).ReleaseStringUTFChars(msg,str_copy);
     return env->NewStringUTF("在 Native 层构造 Java String");
 }
 

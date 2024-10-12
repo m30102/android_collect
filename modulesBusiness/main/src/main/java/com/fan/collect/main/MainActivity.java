@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.fan.collect.base.constance.NaviConst;
-import com.fan.collect.main.study.activity.launch.singletask.ComponentsDemo;
+import com.fan.collect.main.study.appsflyer.AppsflyerActivity;
 import com.fan.collect.main.study.facebook.FaceBookLoginActivity;
 import com.fan.collect.main.study.google.GoogleLoginActivity;
 import com.fan.collect.main.study.image.ImageoptActivity;
@@ -17,9 +17,6 @@ import com.fan.collect.main.study.language.MulLanguage;
 import com.fan.collect.main.study.network.NetworkCheckActivity;
 import com.fan.collect.main.study.view.CustomViewActivity;
 import com.fan.collect.module.main.databinding.ActivityMainMainBinding;
-import java.util.HashMap;
-
-import okhttp3.internal.tls.OkHostnameVerifier;
 
 @Route(path = NaviConst.ACTIVITY_MAIN)
 public class MainActivity extends AppCompatActivity {
@@ -56,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
         });
         binding.btnGallery.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, ImageoptActivity.class));
+        });
+
+        binding.btnAppsflyer.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, AppsflyerActivity.class));
         });
     }
 

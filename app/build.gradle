@@ -6,7 +6,8 @@ apply from : '../common.gradle'
 android {
     namespace 'com.fan.collect'
     defaultConfig {
-        applicationId "com.fan.collect"
+//        applicationId "com.fan.collect"
+        applicationId "com.arkgames.sjzt.aptoide"
 //        applicationId "com.arkgames.rod"
         manifestPlaceholders = [
                 XG_ACCESS_ID : "1580018760",

@@ -17,7 +17,7 @@ import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import java.util.Locale
 
-
+//  极客时间 breakpad https://time.geekbang.org/column/article/70602
 class MyApp:Application() {
     val TAG = "MyApp"
     override fun onCreate() {

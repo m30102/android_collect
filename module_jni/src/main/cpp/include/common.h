@@ -8,7 +8,7 @@
 #include <string>
 #include <android/log.h>
 #include <iostream>
-#define  LOG_TAG "native"
+#define  LOG_TAG "nativetag"
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__) // 定义LOGI类型
 
 #endif //ANDROID_COLLECT_COMMON_H

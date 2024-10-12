@@ -38,9 +38,13 @@ import com.google.android.gms.games.Games;
 //import com.google.android.gms.games.PlayGames;
 //import com.google.android.gms.games.PlayGamesSdk;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.ktx.FirebaseKt;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 
 public class GoogleLoginActivity extends BaseVBActivity<ActivityLoginGoogleBinding> {
@@ -71,6 +75,13 @@ public class GoogleLoginActivity extends BaseVBActivity<ActivityLoginGoogleBindi
         FirebaseApp.initializeApp(this);
         Log.e(getTAG(),"初始化file");
         initgooglePlay();
+
+        EnumMap<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap = new EnumMap<>(FirebaseAnalytics.ConsentType.class);
+        consentMap.put(FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE, FirebaseAnalytics.ConsentStatus.GRANTED);
+        consentMap.put(FirebaseAnalytics.ConsentType.AD_STORAGE, FirebaseAnalytics.ConsentStatus.GRANTED);
+        consentMap.put(FirebaseAnalytics.ConsentType.AD_USER_DATA, FirebaseAnalytics.ConsentStatus.GRANTED);
+        consentMap.put(FirebaseAnalytics.ConsentType.AD_PERSONALIZATION, FirebaseAnalytics.ConsentStatus.GRANTED);
+        FirebaseAnalytics.getInstance(this).setConsent(consentMap);
     }
 
     private GoogleApiClient mGoogleApiClient;

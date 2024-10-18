@@ -34,7 +34,8 @@ dependencies {
     kapt ext.libARouterCompiler
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation 'net.aihelp:android-aihelp-aar:4.6.+'
+//    implementation 'net.aihelp:android-aihelp-aar:4.6.+'
+    implementation 'net.aihelp:android-aihelp-aar:3.3.2'
     implementation 'com.facebook.android:facebook-login:17.0.2'
     implementation 'com.google.android.ump:user-messaging-platform:3.0.0'
 

@@ -61,6 +61,7 @@ public class GoogleLoginActivity extends BaseVBActivity<ActivityLoginGoogleBindi
     // https://console.cloud.google.com/apis/credentials/oauthclient/663360936834-io9e2s0p5j52mr9edsp1re0vd3cekiec.apps.googleusercontent.com?project=expanded-run-410009
     // https://developer.android.google.cn/games/pgs/android/android-signin?authuser=0&hl=ru
     // https://android.stackexchange.com/questions/252314/how-to-sign-out-of-google-play-games
+    // https://www.jianshu.com/p/7fcebce03af5
     // summerfff0211@gmail.com  00000wjdmM
     // google游戏
     private static final int SIGN_LOGIN = 901;

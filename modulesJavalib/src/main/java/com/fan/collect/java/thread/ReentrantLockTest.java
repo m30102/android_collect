@@ -1,5 +1,6 @@
 package com.fan.collect.java.thread;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -8,43 +9,57 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ReentrantLockTest {
 
 
-    static int i = 6000;
+    static class RcSyncPrinter implements Runnable {
 
-    Lock lock = new ReentrantLock();
+        private static final int PRINT_COUNT = 10;
+        private final Lock reentrantLock;
+        private final Condition thisCondition;
+        private final Condition nextCondition;
+        private final char printChar;
 
-    AtomicInteger a = new AtomicInteger(6000);
+        public RcSyncPrinter(Lock reentrantLock, Condition thisCondition, Condition nextCondition,
+                             char printChar) {
+            this.reentrantLock = reentrantLock;
+            this.nextCondition = nextCondition;
+            this.thisCondition = thisCondition;
+            this.printChar = printChar;
+        }
 
-    public void order2(){
-        a.decrementAndGet();
-    }
-    public void order(){
-        lock.lock();
-        try {
-            i --;
-        }finally {
-            lock.unlock();
+        @Override
+        public void run() {
+            reentrantLock.lock();
+            try {
+                for (int i = 0; i < PRINT_COUNT; i++) {
+                    nextCondition.signal();
+                    if (i < PRINT_COUNT - 1) {
+                        try {
+                            thisCondition.await();
+                            System.out.print(printChar);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } finally {
+                reentrantLock.unlock();
+            }
         }
     }
 
 
     public static void main(String[] args) {
-        ReentrantLockTest reentrantLockTest = new ReentrantLockTest();
-        for(int i=0;i<6;i++){
-            new Thread(() -> {
-                for(int j=0;j<1000;j++){
-                    reentrantLockTest.order();
-                    reentrantLockTest.order2();
-                }
-            }).start();
-        }
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        System.out.println("i="+i);
-        System.out.println("a="+reentrantLockTest.a.get());
+        Lock lock = new ReentrantLock();
+        Condition conditionA = lock.newCondition();
+        Condition conditionB = lock.newCondition();
+        Condition conditionC = lock.newCondition();
+        Thread printerA = new Thread(new RcSyncPrinter(lock, conditionA, conditionB, 'A'));
+        Thread printerB = new Thread(new RcSyncPrinter(lock, conditionB, conditionC, 'B'));
+        Thread printerC = new Thread(new RcSyncPrinter(lock, conditionC, conditionA, 'C'));
+        printerA.start();
+        printerB.start();
+        printerC.start();
+
     }
 
 }

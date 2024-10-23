@@ -4,6 +4,6 @@ package com.fan.collect.java.thread;
 public class 三个线程顺序执行 {
 
     public static void main(String[] args) {
-        
+
     }
 }

@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+//    id "com.google.gms.google-services"
 }
 apply from : '../common.gradle'
 // https://juejin.cn/post/7129780699145437215?spm=a2c6h.12873639.article-detail.9.68b944c4PixYTg

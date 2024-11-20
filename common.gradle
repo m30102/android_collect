@@ -1,38 +1,35 @@
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-// 创建工程两个冒号  :modulesBase:lib_base
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-kapt'
+import java.text.SimpleDateFormat
+
+ext {
+    compileAndroid = [
+            compileSdk : 35,
+            minSdk     : 24,
+            targetSdk  : 34,
+            currentTime: new SimpleDateFormat("yyyyMMddHHmm").format(new Date())
+    ]
+}
 
 android {
-
-    compileSdkVersion 34
-//    buildToolsVersion rootProject.ext.android.buildToolsVersion
-
+    compileSdk project.compileAndroid.compileSdk
     defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
-        consumerProguardFiles 'consumer-rules.pro'
-
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
-
+        minSdk project.compileAndroid.minSdk
+        targetSdk project.compileAndroid.targetSdk
     }
-
     buildFeatures.viewBinding = true
-
+    buildFeatures.buildConfig = true
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
+    /*if (pluginManager.hasPlugin("com.android.library")) {
+        android.libraryVariants.all {
+            variant ->
+                variant.outputs.all {
+                    outputFileName = "sdk" + project.name + "@" + buildType.name + project.compileAndroid.currentTime + ".aar"
+                }
+        }
+    }*/
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-}
-
-dependencies {
 }

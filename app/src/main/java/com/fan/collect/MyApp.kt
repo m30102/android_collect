@@ -2,29 +2,17 @@ package com.fan.collect
 
 import android.app.Application
 import android.content.Context
-import android.content.res.Configuration
-import android.os.Build.VERSION_CODES.JELLY_BEAN_MR1
-import android.os.Build.VERSION_CODES.N
-import android.os.LocaleList
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ThreadUtils
-import com.fan.collect.base.utils.Logger
 import com.hjq.toast.Toaster
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
-import java.util.Locale
 
 //  极客时间 breakpad https://time.geekbang.org/column/article/70602
 class MyApp:Application() {
     val TAG = "MyApp"
     override fun onCreate() {
         super.onCreate()
-        initArouter()
         Toaster.init(this)
-        ThreadUtils.isMainThread()
         val u = UserStrategy (this)
         u.setCrashHandleCallback(object :CrashReport.CrashHandleCallback(){
 
@@ -66,7 +54,6 @@ class MyApp:Application() {
                 return super.onCrashHandleStart2GetExtraDatas(crashType, errorType, errorMsg, errorStack)
             }
         })
-//        CrashReport.initCrashReport(this,"7213fc90a1",true, u)
         Log.e(TAG,"initCrashReport")
         CrashReport.initCrashReport(this,"7213fc90a1",true, u)
     }
@@ -74,12 +61,5 @@ class MyApp:Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
     }
-    private fun initArouter() {
-        Logger.d("initArouter")
-        ARouter.init(this)
-        ARouter.openDebug()
-        ARouter.openLog()
-    }
-
 
 }

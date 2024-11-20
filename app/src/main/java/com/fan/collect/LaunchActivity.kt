@@ -1,21 +1,13 @@
 package com.fan.collect
 
 import android.app.Activity
-import android.app.ActivityManager
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.DimenRes
-import androidx.core.os.ConfigurationCompat
-import androidx.fragment.app.DialogFragment
-import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ScreenUtils
-import com.blankj.utilcode.util.ThreadUtils
-import com.fan.collect.base.constance.NaviConst
-import com.fan.collect.base.http.EasyHttp
 import com.fan.collect.databinding.ActivityMainBinding
-import kotlin.concurrent.thread
 
-// 底部导航BottomNavigationView
 
 class LaunchActivity : Activity() {
 
@@ -79,12 +71,8 @@ class LaunchActivity : Activity() {
                 "\n px330:"+i+" a:"+a+
                 "\n adapt:"+adapt
         tvAs.text = p
-
-
-
         tvAs.setOnClickListener {
-            ARouter.getInstance().build(NaviConst.ACTIVITY_MAIN)
-                    .navigation()
+            startActivity(Intent(this,MainActivity::class.java))
         }
         Log.e("LaunchActivityTAG","onCreate onCreate onCreate");
     }

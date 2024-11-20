@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="test_language">english_language</string>
+    <string name="switch_language">switch_language</string>
+
+</resources>

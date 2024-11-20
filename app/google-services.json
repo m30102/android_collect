@@ -1,0 +1,166 @@
+{
+  "project_info": {
+    "project_number": "1023260358165",
+    "project_id": "the-legend-of-neverland-534086",
+    "storage_bucket": "the-legend-of-neverland-534086.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023260358165:android:df8ed6d4b81909c29c001c",
+        "android_client_info": {
+          "package_name": "com.arkgames.ggplay.tlonglobal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023260358165-7errobbjr811apar93hskk5tmnjuubpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-QhyP_1QclLvGZzEFBEh3rjkjx47GfWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023260358165-7errobbjr811apar93hskk5tmnjuubpg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023260358165-hnt4aq84crt72k9k93la4rvrc38h4o8t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.arkgames.tlonglobal",
+                "app_store_id": "1617034143"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023260358165:android:a669124986dd176d9c001c",
+        "android_client_info": {
+          "package_name": "com.arkgames.sjzt.aptoide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023260358165-enpfanf6iaudcu1m30b0ldu7vkd8h2qa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arkgames.sjzt.aptoide",
+            "certificate_hash": "95bc50e9539855e6c5a96464e30f609d0c04d994"
+          }
+        },
+        {
+          "client_id": "1023260358165-7errobbjr811apar93hskk5tmnjuubpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-QhyP_1QclLvGZzEFBEh3rjkjx47GfWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023260358165-7errobbjr811apar93hskk5tmnjuubpg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023260358165-hnt4aq84crt72k9k93la4rvrc38h4o8t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.arkgames.tlonglobal",
+                "app_store_id": "1617034143"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023260358165:android:fe75350dc8c4fdb89c001c",
+        "android_client_info": {
+          "package_name": "com.arkgames.sjzt.huawei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023260358165-7errobbjr811apar93hskk5tmnjuubpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-QhyP_1QclLvGZzEFBEh3rjkjx47GfWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023260358165-7errobbjr811apar93hskk5tmnjuubpg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023260358165-hnt4aq84crt72k9k93la4rvrc38h4o8t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.arkgames.tlonglobal",
+                "app_store_id": "1617034143"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023260358165:android:c836b64145361cee9c001c",
+        "android_client_info": {
+          "package_name": "com.arkgames.sjzt.hw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023260358165-7errobbjr811apar93hskk5tmnjuubpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-QhyP_1QclLvGZzEFBEh3rjkjx47GfWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023260358165-7errobbjr811apar93hskk5tmnjuubpg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023260358165-hnt4aq84crt72k9k93la4rvrc38h4o8t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.arkgames.tlonglobal",
+                "app_store_id": "1617034143"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

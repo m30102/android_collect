@@ -1,0 +1,15 @@
+https://subingwen.cn/linux/library/
+
+gcc add.c div.c mult.c sub.c -c -I ../include/
+ar rcs libcalc.a a.o b.o c.o
+ar rcs libcalc.a *.o
+
+命令行编译exe
+g++ main.cpp -o app -L . -l calc
+-L: 指定库所在的目录 (calc的目录)
+-l: 指定库的名字, 需要掐头(lib)去尾(.a) 剩下的才是需要的静态库的名字
+
+cmake编译exe
+link_directories(app ${SRC_LIST})
+cmake .. -G "MinGW Makefiles"
+make

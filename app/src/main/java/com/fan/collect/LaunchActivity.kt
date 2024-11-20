@@ -1,15 +1,13 @@
 package com.fan.collect
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.DimenRes
-import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ScreenUtils
-import com.fan.collect.base.constance.NaviConst
 import com.fan.collect.databinding.ActivityMainBinding
 
-// 底部导航BottomNavigationView
 
 class LaunchActivity : Activity() {
 
@@ -27,8 +25,6 @@ class LaunchActivity : Activity() {
         val displayMetrics2 = application.resources.displayMetrics
         Log.e("TestActivity", "density2:"+displayMetrics2.density)
         Log.e("TestActivity", "scaledDensity2:"+displayMetrics2.scaledDensity)
-
-
     }
 
     fun resDp2px(@DimenRes dpId: Int): Int {
@@ -75,20 +71,49 @@ class LaunchActivity : Activity() {
                 "\n px330:"+i+" a:"+a+
                 "\n adapt:"+adapt
         tvAs.text = p
-
-
-
         tvAs.setOnClickListener {
-            ARouter.getInstance().build(NaviConst.ACTIVITY_MAIN)
-                    .navigation()
+            startActivity(Intent(this,MainActivity::class.java))
         }
+        Log.e("LaunchActivityTAG","onCreate onCreate onCreate");
+    }
 
+    /*fun request(){
+        val  a  = EasyHttp("https://www.mxnzp.com/api/daily_word/recommend?app_secret=your&app_id=your")
+        a.access()
+        if(a.success()){
+            val b = a.responseStr
+            Log.e("LaunchActivityTAG","res:"+b)
+        }else{
+            Log.e("LaunchActivityTAG", a.httpCode.toString() + a.httpAccessErrMsg)
+        }
+    }*/
 
-        Log.e("LaunchActivity","onCreate onCreate onCreate");
+    override fun onStart() {
+        super.onStart()
+        Log.e("LaunchActivityTAG","onStart onStart onStart");
+    }
+    override fun onRestart() {
+        super.onRestart()
+        Log.e("LaunchActivityTAG","onRestart onRestart onRestart");
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.e("LaunchActivityTAG","onResume onResume onResume");
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("LaunchActivityTAG","onPause onPause onPause");
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("LaunchActivityTAG","onStop onStop onStop");
+
     }
 
     override fun onDestroy() {
-        Log.e("LaunchActivity","onDestroyonDestroyonDestroy");
         super.onDestroy()
+        Log.e("LaunchActivityTAG","onDestroy onDestroy onDestroy");
     }
 }

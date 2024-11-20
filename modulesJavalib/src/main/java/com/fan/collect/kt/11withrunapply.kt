@@ -5,8 +5,8 @@ fun main() {
 //    withTest()
 //    runTest()
 //    applyTest()
-//    Util.func2()
-//    Util.func1()
+    Util.func2()
+    Util.func1()
     ConstantsMt.func1() // 编译成java ConstantsMt.INSTANCE.func1();
 }
 

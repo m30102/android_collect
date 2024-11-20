@@ -14,12 +14,9 @@ fun dependencies(block: Dependency.() -> Unit): List<String> {
     dependency.block()
     return dependency.libraries
 }
-
-
 fun main() {
     test1()
 }
-
 private fun test1() {
     val libraries = dependencies {
         implementation("com.squareup.retrofit2:retrofit:2.6.1")

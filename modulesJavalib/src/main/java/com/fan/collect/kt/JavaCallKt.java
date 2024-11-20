@@ -1,18 +1,39 @@
 package com.fan.collect.kt;
 
 
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
+
 public class JavaCallKt {
 
-    public static void main(String[] args) {
-        staticCall();
-        KtClass ktClass = new KtClass();
-        ktClass.funckt();
-        System.out.println("C9:71:17:76:B8:71:DC:1D:73:17:B4:F1:23:EA:ED:68".replaceAll(":",""));
-        // C9:71:17:76:B8:71:DC:1D:73:17:B4:F1:23:EA:ED:68
+    public static void main(String[] args) throws SocketException {
+        Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+        while (networkInterfaces.hasMoreElements()) {
+            NetworkInterface ni = networkInterfaces.nextElement();
+            Enumeration<InetAddress> addresses = ni.getInetAddresses();
+            while (addresses.hasMoreElements()) {
+                InetAddress addr = addresses.nextElement();
+                if (addr instanceof Inet6Address) {
+                    System.out.println(addr.getHostAddress());
+                }
+            }
+        }
+        try {
+            InetAddress localHost = InetAddress.getLocalHost();
+            String hostAddress = localHost.getHostAddress();
+            System.out.println("hostAddress:"+hostAddress);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void staticCall() {
         HelperKt.doSomething();
+        Util.Companion.func2();
         Util.func2();
         ConstantsMt.INSTANCE.func1();
         String a = Util.asd;

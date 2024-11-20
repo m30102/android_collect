@@ -3,6 +3,7 @@ package com.fan.collect.kt
 val PI = 3.14
 fun main() {
     val a:Int = 1
+    val aa:String = "q1w"
     val b = 2
     val c:Int
     c = 3
@@ -19,7 +20,7 @@ fun main() {
 
     val intArray:Array<Int> = arrayOf(2, 3);
 
-    val array = Array(5) { it ->
+    val array = Array(7) {
         it * it;
     }
     array.forEach { print(it.toString()+" ") }

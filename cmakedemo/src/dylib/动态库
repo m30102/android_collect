@@ -1,0 +1,17 @@
+https://subingwen.cn/linux/library/#2-%E5%8A%A8%E6%80%81%E5%BA%93
+
+// jni 一步 gcc -I %JAVA_HOME%\include -I %JAVA_HOME%\include\win32  -fPIC -shared -o Jnitest-c.dll   test.c
+g++ add.c div.c mult.c sub.c -c -fpic -I  ../include/
+g++ -shared *.o -o libcalc.dll
+g++ main.cpp -o app -L . -l calc
+
+
+windows下:
+g++ main.cpp -I 头文件路径 -L 动态库路径 -I 调用的动态库  -o 可执行文件名
+
+可能出现需要绝对路径的情况?
+g++ main.cpp -I . -o app -L . -l calc
+g++ main.cpp -I . -o app -L "D:\work\android\android_collect\cmakedemo\src\dylib" -l calc
+
+libcalc.dll 改名, 执行app.exe 可能会报找不到libcalc.dll
+

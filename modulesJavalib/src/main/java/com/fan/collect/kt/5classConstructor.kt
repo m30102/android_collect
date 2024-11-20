@@ -9,6 +9,9 @@ fun main() {
     val d = Driver("haha",12)
 }
 /**
+in person init...name:fff age:12
+fff is eating. He is 12 years old
+
 in person init...name: age:0
     in student init ...name: age:0 sno: grade:0
     in student constructor2 ...
@@ -54,6 +57,6 @@ class Student2(val sno: String = "", val grade: Int = 0, name: String = "", age:
 class Driver :Person{
     // 没有主构造，所以只能调用super
     constructor(name:String,age:Int):super(name,age){
-
+        println(" in Driver constructor ...")
     }
 }

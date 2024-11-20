@@ -18,8 +18,8 @@ public class FunctionRef {
 
         Function<Integer,Integer> f = x-> x + 1;
         Function<Integer,Integer> g = x-> x * 2;
-//        f.andThen(g)//f(g(x))
-//        f.compose(g)//g(f(x))
+//        f.andThen(g)//g(f(x))
+//        f.compose(g)//f(g(x))
         System.out.println(f.andThen(g).apply(1));//4
         System.out.println(f.andThen(g).apply(2));//6
         System.out.println(f.andThen(g).apply(3));//8

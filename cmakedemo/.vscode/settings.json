@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "ostream": "c",
-        "head.h": "c",
-        "iostream": "cpp"
-    }
-}

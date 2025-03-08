@@ -29,8 +29,26 @@ fun <T> T.build2(block:T.()->Unit):T{
 // 泛型实化 inline + reified
 inline  fun <reified T> getGenericType() = T::class.java
 
+
+
+fun <T:Any?> method3(t:T){
+    t?.hashCode()
+}
+
+fun <T:Any> method4(t:T){
+    t.hashCode()
+}
+
+fun <T:Any> method5(t:T?){
+    t?.hashCode()
+}
+
 fun main() {
     println(method<String>("12"))
+    method3(null)// 可传空 因为是Any?
+//    method4(null)// 编译不过
+    method5(null)// 可传空  因为是T?
+
     val result1 = getGenericType<String>()// 编译后 Class<String> result1 = String.class;
     val result2 = getGenericType<Int>()// Class<Integer> result2 = Integer.class;
     println("result1 is $result1")
@@ -43,6 +61,7 @@ fun main() {
 
 
 }
+
 // 协变:假设有一个MyClass<T>,A是B子类型，同时MyClass<A> 是MyClass<B>的子类型，那么MyClass可被成为在T这个泛型上是协变的, 泛型数据类型只可读 则协变
 // T只能出现在out位置上, 不能出现在in位置上，所以不能用set，构造也必须private var或者val
 //为了处理为 SimpleData<Student> 是SimpleData<Person>的子类

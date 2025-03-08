@@ -17,7 +17,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_30"
-                    android:text="四大组件" />
+                    android:text="基本组件" />
             <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_customview"
                     style="@style/ButtonStyle"
@@ -69,6 +69,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_30"
                 android:text="appsflyer" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_coroutines"
+                    style="@style/ButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:text="coroutines" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

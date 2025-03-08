@@ -52,6 +52,8 @@
         <activity android:name="com.fan.collect.study.image.ImageoptActivity"></activity>
         <activity android:name="com.fan.collect.study.facebook.FaceBookLoginActivity"></activity>
         <activity android:name="com.fan.collect.study.google.GoogleUmpActivity"></activity>
+        <activity android:name="com.fan.collect.study.view.RecycleViewActivity"></activity>
+        <activity android:name="com.fan.collect.study.coroutines.CoroutinesActivity"></activity>
 
         <!--https://developers.google.com/games/services/android/quickstart?hl=zh-cn-->
         <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/google_play_app_id"/>

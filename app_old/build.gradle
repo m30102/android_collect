@@ -1,0 +1,126 @@
+apply plugin: 'com.android.application'
+android {
+    namespace "com.example.administrator.android_fan"
+    compileSdkVersion 30
+    defaultConfig {
+        applicationId "com.example.administrator.android_fan"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs{
+        config{
+            storeFile file("smartcanteen.jks")
+            storePassword "smartcanteen"
+            keyAlias = "CCBSmartcanteen"
+            keyPassword "smartcanteen"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug{
+            signingConfig signingConfigs.config
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+
+    viewBinding {
+        enabled = true
+    }
+    configurations.all {
+
+        resolutionStrategy {
+            force 'com.squareup.okhttp3:okhttp:3.10.0'
+        }
+
+    }
+   /* rebuildChannel {
+        baseDebugApk = new File(project.projectDir, "baseApk/app-debug.apk")
+        isFastMode = true
+    }*/
+  /*  channel {
+        //指定渠道文件
+        channelFile = file("D:\\work\\android\\android_study\\android_study\\app\\channel.txt")
+        //多渠道包的输出目录，默认为new File(project.buildDir,"channel")
+        baseOutputDir = new File(project.buildDir, "channel")
+        //多渠道包的命名规则，默认为：${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}
+        apkNameFormat = '${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}'
+        //快速模式：生成渠道包时不进行校验（速度可以提升10倍以上）
+        isFastMode = true
+        buildTimeDateFormat = 'yyyyMMdd-HH:mm:ss'
+    }*/
+
+}
+
+
+/*
+greendao {
+    //数据库的schema版本，也可以理解为数据库版本号
+    schemaVersion 1
+    //设置DaoMaster、DaoSession、Dao包名，也就是要放置这些类的包的全路径。
+    daoPackage 'com.fan.frame.greendao'
+    //设置DaoMaster、DaoSession、Dao目录
+    targetGenDir 'src/main/java'
+}
+*/
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.liulishuo.okdownload:okdownload:1.0.5'
+    implementation 'com.liulishuo.okdownload:okhttp:1.0.5'
+    implementation 'com.liulishuo.filedownloader:library:1.7.6'
+    implementation 'com.blankj:utilcodex:1.31.1'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'org.litepal.android:java:3.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "com.squareup.okhttp3:okhttp:3.10.0"
+    // jetpack
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+    implementation "com.squareup.leakcanary:leakcanary-android:2.4"
+
+
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.jeremyliao:live-event-bus-x:1.7.2'
+    implementation "com.youth.banner:banner:1.4.10"
+    /*implementation "androidx.camera:camera-core:1.0.0-beta07"
+    implementation "androidx.camera:camera-camera2:1.0.0-beta07}"
+    implementation "androidx.camera:camera-lifecycle:1.0.0-beta07"
+    implementation "androidx.camera:camera-view:1.0.0-alpha14"
+    implementation "androidx.camera:camera-extensions:1.0.0-alpha14"*/
+    // 二维码
+//    implementation project(":android")
+    implementation "androidx.constraintlayout:constraintlayout:2.1.1"
+//    api 'com.leon.channel:helper:2.0.3'
+    implementation 'com.github.gzu-liyujiang:Android_CN_OAID:4.2.5.1'
+
+}

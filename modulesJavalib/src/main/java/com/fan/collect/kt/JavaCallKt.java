@@ -32,12 +32,28 @@ public class JavaCallKt {
     }
 
     private static void staticCall() {
+        // 只有顶层方法和JvmStatic修饰才能是静态方法
+
+        // java调用kt顶层静态
         HelperKt.doSomething();
-        Util.Companion.func2();
+        // java调用kt companion JvmStatic静态
         Util.func2();
+        // java调用companion 方法1
+        Util.Companion.func1();
+        // java调用companion 方法2
+        Util.Companion.func2();
+        // java调用非companion 方法1
+        new Util().func1();
+
+        // java调用kt单例 方法1
         ConstantsMt.INSTANCE.func1();
+        // java调用kt companion 静态属性
         String a = Util.asd;
+        // java调用kt 单例静态属性
         String b = ConstantsMt.img_dir;
+        // java调用kt 顶层静态属性
         String c = HelperKt.key_loginInfo;
+
+        //kt 调用kt 参考 HelperKt.doSomething
     }
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fan.collect.study.activity.launch.singletask.ComponentsDemo;
 import com.fan.collect.study.appsflyer.AppsflyerActivity;
+import com.fan.collect.study.coroutines.CoroutinesActivity;
 import com.fan.collect.study.facebook.FaceBookLoginActivity;
 import com.fan.collect.study.google.GoogleLoginActivity;
 import com.fan.collect.study.image.ImageoptActivity;
@@ -21,17 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     ActivityMainMainBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.e("MainActivityTAG","onCreate");
+        Log.e("MainActivityTAG", "onCreate");
         super.onCreate(savedInstanceState);
         binding = ActivityMainMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         binding.btnComponent.setOnClickListener(v -> {
-//            int i = 1/0;
             startActivity(new Intent(MainActivity.this, ComponentsDemo.class));
-
         });
         binding.btnCustomview.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, CustomViewActivity.class));
@@ -53,26 +52,26 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ImageoptActivity.class));
         });
 
-        binding.btnAppsflyer.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, AppsflyerActivity.class));
+        binding.btnCoroutines.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, CoroutinesActivity.class));
         });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e("MainActivityTAG","onStart");
+        Log.e("MainActivityTAG", "onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("MainActivityTAG","onResume");
+        Log.e("MainActivityTAG", "onResume");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.e("LaunchActivity","oMainActivityroyonDestroyonDestroy");
+        Log.e("LaunchActivity", "oMainActivityroyonDestroyonDestroy");
     }
 }

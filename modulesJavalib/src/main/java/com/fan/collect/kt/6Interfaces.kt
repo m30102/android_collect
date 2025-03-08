@@ -24,8 +24,12 @@ class Au : Study {
 
     }
 }
+public interface LifecycleOwner {
+    public val lifecycle: String
+}
 
 fun main() {
+
     val s:Study = object:Study{
 
         override fun readBooks() {
@@ -38,10 +42,32 @@ fun main() {
 
     }
     s.deflll()// Study.DefaultImpls.deflll(this);
+   Runnable {
 
+   }
+    Study2{
 
+    }
+    object :Study2{
+        override fun readBooks() {
+        }
+    }
+    object :Study{
+        override fun readBooks() {
+        }
+
+        override fun doHomework() {
+        }
+    }
 }
 
+fun testStudy(s:Study2){
+    s.readBooks()
+}
+
+fun interface Study2{
+    fun readBooks()
+}
 interface Study {
     fun readBooks()
     fun doHomework()

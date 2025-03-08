@@ -1,5 +1,7 @@
 package com.fan.collect.kt
 
+import java.util.concurrent.Executors
+
 val PI = 3.14
 fun main() {
     val a:Int = 1
@@ -24,4 +26,7 @@ fun main() {
         it * it;
     }
     array.forEach { print(it.toString()+" ") }
+
+
+
 }

@@ -17,7 +17,15 @@ import java.util.Arrays
 // 顶层方法编译为静态方法  编译为java后 HelperKt.doSomething();
 fun doSomething(){
     println("doSomething")
+    // kt调用kt companion
     Util.func1()
+    // kt调用kt companion JvmStatic
+    Util.func2()
+    // kt调用kt 非companion
+    val u  = Util()
+    u.func1()
+    //kt 调用kt单例 方法1
+    ConstantsMt.func1()
 }
 
 class KtClass(){

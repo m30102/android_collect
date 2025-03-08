@@ -25,6 +25,7 @@ public final class MySet1<T> implements Set<T>, KMappedMarker {
     public int getSize() {
         return this.helpSet.size();
     }
+    .... 所有方法都有
 */
 
 

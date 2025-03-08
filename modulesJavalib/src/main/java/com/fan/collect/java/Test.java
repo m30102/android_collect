@@ -7,22 +7,16 @@ public class Test {
     private static final Semaphore semaphore = new Semaphore(1);
     public static void main(String[] args) {
 
-     /*   new Thread(() -> {
-            System.out.println("sub 1");
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("sub 2");
-            semaphore.release();
-        }).start();*/
-        System.out.println("main 1");
-        try {
-            semaphore.acquire();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("main 2");
+        Integer a = 100;
+        Integer b = 100;
+        System.out.println(a == b);
+
+        Integer c = 200;
+        Integer d = 200;
+        System.out.println(c ==d);
+
+        Integer e = 200;
+        int f = 200;
+        System.out.println(e == f);
     }
 }

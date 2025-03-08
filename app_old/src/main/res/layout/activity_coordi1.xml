@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <!--设置scroll表示该View参与联动。具体效果需要跟其他Flag组合。
+        app:layout_scrollFlags="scroll|exitUntilCollapsed" 发生向上滚动事件时，Child View向上滚动退出直至最小高度，Child View不会完全退出屏幕。向下滚动recycleView到item0时Child View才开始逐渐全部显现出来
+        app:layout_scrollFlags="scroll|enterAlwaysCollapsed" 发生向上滚动事件时，Child View向上滚动退出直至最小高度，向下滚动时，Child View先向下滚动到最小高度值，向下滚动recycleView到item0时Child View才开始逐渐全部显现出来
+        -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#55f"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            ></View>
+        <!--下面view不会被顶上去-->
+        <View
+            android:background="#FF00FF"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#00ff00"
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+    <!-- 不设置behavior 那么上面的AppBarLayout会遮挡住一部分RecyclerView。 app:layout_behavior="@string/appbar_scrolling_view_behavior"  -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+         />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

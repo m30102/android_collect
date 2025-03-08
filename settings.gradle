@@ -24,6 +24,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "android_collect"
 include ':app'
+//include ':app_old'
 include ':module_base'
 include ':modulesJavalib'
 include ':module_jni'
+include ':app_firstcode3'
+include ':testapp'

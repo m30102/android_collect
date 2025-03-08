@@ -8,7 +8,7 @@ fun main() {
 //    test1()
 //    test2()
 //    test3()
-//    test4()
+    test4()
 //    test5()
 //    printDot2()//Suspend function 'printDot2' should be called only from a coroutine or another suspend function
 //    test6()
@@ -27,8 +27,8 @@ fun test0(){
         println("aaaaa")
         println("in.."+Thread.currentThread().id)// 24
     }
-    println("out.."+Thread.currentThread().id)// 1
-    Thread.sleep(1000)
+    println("out.."+Thread.currentThread().id)// 1  GlobalScope.launch不阻塞线程 先打印out
+//    Thread.sleep(1000)
 }
 private fun test11(){
     test1()
@@ -38,7 +38,6 @@ private fun test11(){
 var a = 0
 private fun test1() {
     // runBlocking阻塞线程的协程,直到代码和子协程的代码执行完毕才释放. 测试环境使用
-
     runBlocking {
         println("a="+a)
         println(" in "+Thread.currentThread().id)// 1
@@ -59,7 +58,7 @@ launch1 finished
 launch2 finished
 runBlocking finished!
 
-launch创建子协程，如果外层协程结束了，那么子协程也会结束
+launch创建子协程，如果外层协程结束了，那么子协程也会结束. launch{}相当于handler.post{},所以会先打印runBlocking end
  */
 fun test2(){
     runBlocking {
@@ -105,6 +104,7 @@ fun test4(){
 suspend fun printDot(){
     println("printDot")
     delay(1000)
+    println("printDot..")
 }
 // coroutineScope 继承外部作用域,创建协程作用域，能在挂起函数和协程作用域中调用.launch只能在协程作用域中调用
 suspend fun printDot2(){
@@ -123,13 +123,11 @@ fun test5(){
     val job = Job()
     val coroutineScope = CoroutineScope(job)// CoroutineScope是一个函数
     coroutineScope.launch {
-
     }
     coroutineScope.launch {
-
     }
     // 调用一次cancel
-    coroutineScope.cancel()
+    job.cancel()
 }
 // launch不能获得执行结果,返回值为job对象,换async. async也需要在协程作用域中调用
 /**

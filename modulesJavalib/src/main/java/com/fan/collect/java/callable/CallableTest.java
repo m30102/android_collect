@@ -1,6 +1,7 @@
 package com.fan.collect.java.callable;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,8 +25,30 @@ public class CallableTest {
 
     public static void main(String[] args)  {
         try {
-            futureTest2();
+//            futureTest2();
+            completable();
         }catch (Exception e){}
+    }
+
+    public static void completable() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future = new
+                CompletableFuture<>();
+        System.out.println(System.currentTimeMillis()+"_0_id_"+Thread.currentThread().getId());
+        new Thread(() -> {
+            try {
+                System.out.println(System.currentTimeMillis()+" _1_id_"+Thread.currentThread().getId());
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(System.currentTimeMillis()+"_2_id_"+Thread.currentThread().getId());
+            future.complete("1111");
+            System.out.println(System.currentTimeMillis()+"_3_id_"+Thread.currentThread().getId());
+        }).start();
+        System.out.println(System.currentTimeMillis()+"_4_id_"+Thread.currentThread().getId());
+        String string = future.get();
+        System.out.println(System.currentTimeMillis()+"_5_id_"+Thread.currentThread().getId());
+
     }
 
     public static void futureTest2()throws ExecutionException, InterruptedException{

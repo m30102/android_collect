@@ -1,6 +1,7 @@
 package com.fan.collect.java.concurrent;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutionException;
@@ -17,8 +18,8 @@ public class CompleteFutureTest {
     public static void main(String[] args) {
 //        test1();
 //        test2();
-//        test3();
-        test4();
+        test3();
+//        test4();
     }
 
 
@@ -47,19 +48,21 @@ public class CompleteFutureTest {
         ExecutorService executorService = Executors.newCachedThreadPool();
         Supplier<String> taskA = () ->{
             System.out.println(System.currentTimeMillis()+" A执行线程:"+Thread.currentThread().getId());
-
-            try {
-//                Thread.sleep(1000);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
             return "qwe";
         };
 
         Function<String,String> taskB = s->{
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println(System.currentTimeMillis()+" B执行线程:"+Thread.currentThread().getId() +" s:"+s);
             return s+"__123";
         };
+
+
+//        CompletableFuture<String> future = CompletableFuture.supplyAsync(taskA, executorService).thenApply(taskB);
         CompletableFuture<String> future = CompletableFuture.supplyAsync(taskA, executorService);
         /*try {
             Thread.sleep(1000);// 保证A 先执行完毕
@@ -67,11 +70,20 @@ public class CompleteFutureTest {
         }*/
 //        boolean done = future.isDone();
 //        System.out.println("done:"+done);
-        future.thenApply(taskB);// taskA执行完毕才会执行taskB, 如果睡眠1s 这里会在主线程执行，没问题，因为A已经执行完了，这里交给主线程执行没毛病。
+        // taskA执行完毕才会执行taskB, 如果睡眠1s 这里会在主线程执行，没问题，因为A已经执行完了，这里交给主线程执行没毛病。
         //    如果不睡眠 会马上和A同一个线程执行，当A 执行完毕后再执行B
+        CompletableFuture<String> futureb = future.thenApply(taskB);// 这里调用future和上面链式调用future 有区别的
 //        future.thenApplyAsync(taskB);// taskA执行完毕才会执行taskB ,异步线程池
 //        future.thenApplyAsync(taskB,executorService);// taskA执行完毕才会执行taskB
-        System.out.println("haha");
+        try {
+            System.out.println(System.currentTimeMillis()+" jion1:"+Thread.currentThread().getId());
+            String s = futureb.join();//CompletionException
+            System.out.println(System.currentTimeMillis()+" jion2:"+Thread.currentThread().getId());
+//            String s = futureb.get();
+            System.out.println(s);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 //        future.thenAccept()// 和thenApply区别是无返回值, 如果前一个任务没有结果或者不需要前一个任务的结果就用thenAccept
 //        future.thenRun()// 没有入参，没有返回值

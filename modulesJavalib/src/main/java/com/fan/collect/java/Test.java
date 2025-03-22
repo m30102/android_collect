@@ -4,10 +4,8 @@ import java.util.concurrent.Semaphore;
 
 public class Test {
 
-   int qwe1;
-   int asd1;
-   int zxc1;
-   
+    private String xx;
+
     public static void main(String[] args) {
 
         Integer a = 100;

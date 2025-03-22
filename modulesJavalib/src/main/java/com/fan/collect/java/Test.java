@@ -3,7 +3,6 @@ package com.fan.collect.java;
 import java.util.concurrent.Semaphore;
 
 public class Test {
-    private static final Semaphore semaphore = new Semaphore(1);
     public static void main(String[] args) {
 
         Integer a = 100;

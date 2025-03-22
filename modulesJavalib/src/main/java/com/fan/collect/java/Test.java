@@ -3,7 +3,9 @@ package com.fan.collect.java;
 import java.util.concurrent.Semaphore;
 
 public class Test {
-
+    String a;
+    String b;
+    String c;
     private static final Semaphore semaphore = new Semaphore(1);
     public static void main(String[] args) {
 

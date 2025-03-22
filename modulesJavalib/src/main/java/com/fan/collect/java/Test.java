@@ -4,9 +4,9 @@ import java.util.concurrent.Semaphore;
 
 public class Test {
 
-   int qwe;
-   int asd;
-   int zxc;
+   int qwe1;
+   int asd1;
+   int zxc1;
    
     public static void main(String[] args) {
 

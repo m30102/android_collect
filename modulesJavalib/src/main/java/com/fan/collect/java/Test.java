@@ -6,6 +6,7 @@ public class Test {
 
    int qwe;
    int asd;
+   int zxc;
    
     public static void main(String[] args) {
 

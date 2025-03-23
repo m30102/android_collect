@@ -1,0 +1,164 @@
+import org.apache.commons.lang3.StringUtils
+
+// https://blog.csdn.net/qq_30382601?type=blog
+// https://www.bilibili.com/video/BV1DE411Z7nt gradle插件
+
+List l = [1,2,3,4,5,6]
+Map m = [a:1]
+
+class A{
+    int a;
+    void printA(){
+        println(a)
+    }
+}
+println(l)
+println(m)
+new A().printA()//ok 0
+new A(a:111).printA()//ok 111
+// new A(222).printA() //无此构造
+
+def closure = { 11212 }
+println(closure())
+def collect = l.stream().filter { i -> i% 2 ==0}.collect()
+println(collect)
+def collect2 = l.findAll({
+    it % 2 != 0
+})
+//l.findAll{}
+println(collect2)
+
+def test(int i,Closure c){
+    return c (i)
+}
+
+println test(2,{it *2})
+
+println test (2){
+    it * 3
+}
+println test(2){ a ->
+   return a * 4
+}
+
+/*def task = project.task("task13")
+task.doLast {
+}*/
+task task11{
+    println("task11 config...:"+project.getName())
+    println("task11 parent:" + project.parent)
+    doLast {
+        println("excuting task11")
+    }
+}
+task task12{
+    doLast {
+        println("executing task12")
+    }
+}
+
+afterEvaluate {
+    println("afterEvaluate....")// config阶段最后执行
+}
+
+println("gradle.parent "+gradle.parent)
+println("gradle.rootProject.name:"+gradle.rootProject.getName())
+//println("startParameter:"+gradle.startParameter)
+println("startParameter tasknames:"+gradle.startParameter.taskNames)
+gradle.afterProject {
+    println("gradle.afterProject")//afterEvaluate 前面
+}
+
+for (int i=0;i<10;i++){
+    task ("task"+i){
+        println("config task:"+i)
+        def capturedI = i;
+        doLast {
+//            println("exe task"+i)//随便执行一个，比如task4 输出 task10 ,捕获到了引用
+            println("exe task ${capturedI}")
+        }
+    }
+}
+3.times {
+    println("times it:"+it)
+}
+(1..5).each {
+    println("each it:"+it)
+}
+/* ----------插件-------------*/
+
+class MyPlugin1 implements  Plugin<Project>{
+
+    @Override
+    void apply(Project project) {
+        for(int i=0;i<3;i++){
+            project.task("taskInMyPlugin1_"+i){
+                group = 'hahaha'
+                def capturedI   = i;
+                doLast {
+                    println("Executing MyPlugin1 task ${capturedI}")
+                }
+            }
+        }
+    }
+}
+// gradle task4 -x task1 排除任务
+// gradle tasks --all //显示所有task(默认不显示other的)
+apply plugin:MyPlugin1
+//apply(plugin:MyPlugin1)
+/* 使用插件 */
+apply plugin: "java"
+/*buildscript {
+    // 为了让gradle脚本能使用一些第三方类
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    }
+}*/
+
+/* 要在编译的代码中使用 start*/
+
+//比如在Main.java中使用stringUtils
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+}
+/* 要在编译的代码中使用 end/
+
+ */
+/* 在构建的代码中使用 start*/
+buildscript {
+    // 为了让gradle脚本能使用一些第三方类
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+//        classpath group: 'junit', name: 'junit', version: '4.12'
+    }
+}
+
+println "11 im empty ?"+ StringUtils.isEmpty("11")
+/* 在构建的代码中使用 end*/
+
+
+/*  引用builSrc的插件 */
+apply plugin:"org.my.plugin"
+
+/*
+关于版本:
+一个jar的版本,一个插件版本
+classpath 'org.my.plugin:my-plugin:1.0.0'
+plugins {
+    id 'org.my.plugin' version '1.0.0' // 必须显式指定版本
+}
+org.my.plugin:my-plugin:latest.release默认最新版本, 或者1.0+
+id "org.my.plugin" version "latest.release"
+
+或者gradle.properties 中myPluginVersion = 1.0.0
+classpath "org.my.plugin:my-plugin:$myPluginVersion"
+*/

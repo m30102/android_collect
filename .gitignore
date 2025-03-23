@@ -20,3 +20,8 @@ local.properties
 /app/keystores/.idea
 /modulesJavalib/src/main/java/com/fan/collect/java/jni/struct_test.exe
 /modulesJavalib/src/main/java/com/fan/collect/java/jni/struct_test2.exe
+/gradletest/.idea
+/gradletest/bin
+/gradletest/build/tmp
+/gradletest/build/classes
+/gradletest/build

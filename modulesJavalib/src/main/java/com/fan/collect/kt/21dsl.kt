@@ -25,4 +25,11 @@ private fun test1() {
     for (lib in libraries) {
         println(lib)
     }
+    val libraries2 = dependencies {
+        implementation ("aa.bb.cc:2.6.1")
+        implementation("qq.ww.ee:2.6.1")
+    }
+    for (lib in libraries2) {
+        println(lib)
+    }
 }
